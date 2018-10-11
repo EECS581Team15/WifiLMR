@@ -1,13 +1,12 @@
 using System;
 using Gtk;
-using UI = Gtk.Builder.ObjectAttribute;
 
 namespace WifiLMR.UI
 {
     class MainWindow : Window
     {
-        [UI] private Label _label1 = null;
-        [UI] private Button _button1 = null;
+        [Gtk.Builder.ObjectAttribute] private Label _label1 = null;
+        [Gtk.Builder.ObjectAttribute] private Button _button1 = null;
 
         private int _counter;
 
