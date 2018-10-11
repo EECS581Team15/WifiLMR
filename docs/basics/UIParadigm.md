@@ -11,6 +11,7 @@ User Interface Hardware:
 * Relatively small, low-resolution color screen (128x128 to 160x128)
 * Push-to-talk button on the left side
 * Volume/Power knob (on top)
+* RGB status LED (on top)
 * Channel knob (on top)
 * D-pad or 4-direction joystick plus select on front for menu navigation
 
