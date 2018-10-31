@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import ttk
 from .home import UI_Home
+from .settings import UI_Settings
 
 class UI():
 
@@ -28,7 +29,10 @@ class UI():
         self.window.mainloop()
 
     def goHome(self):
-        UI_Home(self.window)
+        UI_Home(self.window, self.goSettings, None, None)
+
+    def goSettings(self):
+        UI_Settings(self.window, self.goHome)
 
 
 
