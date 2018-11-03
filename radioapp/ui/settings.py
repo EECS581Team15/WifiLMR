@@ -4,7 +4,7 @@ File to hold the model of home
 import tkinter
 from tkinter import ttk
 
-class UI_Settings():
+class UISettings():
     def __init__(self, window, back):
         #set up frame
         self.frame = ttk.Frame(window, padding="3 3 3 3")

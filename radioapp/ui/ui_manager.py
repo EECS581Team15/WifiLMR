@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import ttk
-from .home import UI_Home
-from .settings import UI_Settings
+from .home import UIHome
+from .settings import UISettings
 
 class UI():
 
@@ -21,18 +21,17 @@ class UI():
         self.window.option_add("*Background", "blue")
         self.window.option_add("*Foreground", "white")
 
-
-        #initialize the different windows
-
-        #initalize to the homescreen
-        self.goHome()
+        self.start()
+        
+    def start(self):
+        self.go_home()
         self.window.mainloop()
 
-    def goHome(self):
-        UI_Home(self.window, self.goSettings, None, None)
+    def go_home(self):
+        self.currentPage = UIHome(self.window, self.go_settings, None, None)
 
-    def goSettings(self):
-        UI_Settings(self.window, self.goHome)
+    def go_settings(self):
+        self.currentPage = UISettings(self.window, self.go_home)
 
 
 

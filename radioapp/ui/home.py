@@ -5,7 +5,7 @@ import tkinter
 from tkinter import ttk
 import time
 
-class UI_Home():
+class UIHome():
     def __init__(self, window, b1Action, b2Action, b3Action):
         #set up frame
         self.frame = ttk.Frame(window, padding="3 3 3 3")
@@ -40,7 +40,7 @@ class UI_Home():
         tkinter.Button(self.frame, text="2").grid(row=3, column=1, sticky=(tkinter.N, tkinter.W, tkinter.E, tkinter.S))
         tkinter.Button(self.frame, text="3").grid(row=3, column=2, sticky=(tkinter.N, tkinter.W, tkinter.E, tkinter.S))
 
-    def updateChannel(self, channel):
+    def update_channel(self, channel):
         self.channel.set(channel)
 
     def __clock(self):
