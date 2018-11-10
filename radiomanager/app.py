@@ -1,7 +1,6 @@
 """Main entry point for radiomanager"""
 
-import radiomanager.api
+import radiomanager
 
 if __name__ == "__main__":
-    app = radiomanager.api.Application()
-    app.run()
+    radiomanager.app.run("0.0.0.0", 8000, debug=True)
