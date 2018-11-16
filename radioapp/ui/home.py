@@ -6,7 +6,18 @@ from tkinter import ttk
 import time
 
 class UIHome():
+    """Contains UI Home Screen."""
+    
     def __init__(self, window, b1Action, b2Action, b3Action):
+         """
+         Sets up frame.
+         
+         Sets up buttons.
+         
+         Sets up time and channel.
+         
+         """
+        
         #set up frame
         self.frame = ttk.Frame(window, padding="3 3 3 3")
         self.frame.grid(column=0, row=0, sticky=(tkinter.N, tkinter.W, tkinter.E, tkinter.S))
