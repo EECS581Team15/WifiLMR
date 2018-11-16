@@ -5,7 +5,19 @@ import tkinter
 from tkinter import ttk
 
 class UISettings():
+    """Contains UI Settings."""
+    
     def __init__(self, window, back):
+         """
+         Sets up frame.
+         
+         Sets up back.
+         
+         Sets up options menu.
+         
+         Sets up buttons.
+         """
+            
         #set up frame
         self.frame = ttk.Frame(window, padding="3 3 3 3")
         self.frame.grid(column=0, row=0, sticky=(tkinter.N, tkinter.W, tkinter.E, tkinter.S))
