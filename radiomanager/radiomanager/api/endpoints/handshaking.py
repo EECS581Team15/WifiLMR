@@ -7,6 +7,7 @@ Endpoints for pinging the backend, provisioning, and registering/deregistering
 
 import uuid
 import re
+import sqlalchemy.exc
 from werkzeug.exceptions import BadRequest
 from flask import request
 from flask_restful import reqparse, Resource
@@ -40,8 +41,9 @@ class Provision(Resource):
     Clients use this to get setup on the system
     """
     POST_PARSER = reqparse.RequestParser()
-    POST_PARSER.add_argument("name", type=str)
-    POST_PARSER.add_argument("public_key", type=str)
+    POST_PARSER.add_argument("name", type=str, required=True)
+    POST_PARSER.add_argument("public_key", type=str, required=True)
+    POST_PARSER.add_argument("uuid", type=uuid.UUID, required=True)
     ALPHANUMERIC_WITH_SPACES = re.compile("([a-z]|[A-Z]|[0-9]| )*")
 
     def post(self):
@@ -54,9 +56,14 @@ class Provision(Resource):
         raw_name = args["name"]
         self._check_key(raw_key)
         self._check_name(raw_name)
-        device = Device(public_key=raw_key, name=args["name"].encode("utf-8"))
+        device = Device(public_key=raw_key,
+                        name=args["name"].encode("utf-8"),
+                        uuid=args["uuid"])
         FlaskExtensions.db.session.add(device)
-        FlaskExtensions.db.session.commit()
+        try:
+            FlaskExtensions.db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            raise BadRequest("Failed to commit to database")
         return {"result": "success"}
 
     @staticmethod

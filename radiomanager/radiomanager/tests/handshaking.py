@@ -1,3 +1,4 @@
+import uuid
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
@@ -40,6 +41,7 @@ class TestProvision(AppTestCase):
     def test_all_valid(self):
         response = self.client.post("/api/provision", data={
             "public_key": self.VALID_KEY,
+            "uuid": str(uuid.uuid4()),
             "name": "foo bar"})
         self.assert200(response)
         record = Device.query.first()
@@ -56,3 +58,16 @@ class TestProvision(AppTestCase):
             "public_key": "This isn't a key",
             "name": "foo bar"})
         self.assert400(response)
+
+    def test_insert_duplicate_uuid(self):
+        uuid_duplicate = str(uuid.uuid4())
+        response1 = self.client.post("/api/provision", data={
+            "public_key": self.VALID_KEY,
+            "uuid": uuid_duplicate,
+            "name": "foo bar1"})
+        response2 = self.client.post("/api/provision", data={
+            "public_key": self.VALID_KEY,
+            "uuid": uuid_duplicate,
+            "name": "foo bar2"})
+        self.assert200(response1)  # should succeed
+        self.assert400(response2)  # should fail
