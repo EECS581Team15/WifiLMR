@@ -24,5 +24,31 @@ Client (Subscriber Unit)
 
     The UI should be a rather thin layer that sends and receives events to the Client Core. The business logic is abstracted to ease adding new features and make the code more testable.
 
-Backend (Call Routing and Management Console)
+Backend (RadioManager)
 ---------------------------------------------
+
+### Overview
+
+The backend software has two main components: the API portion and the Management Console. The API provides the interface with which the client (RadioApp) interacts. The Management Console is a web application that provides a way to monitor and configure the system. Though these are two separate functions, for the sake of simplicity, the two will be parts of the same application: RadioManager. RadioManager will use an MVC design paradigm as expressed with the flask library.
+
+### Components
+
+* API
+
+    The API module contains the end points for the API. In MVC terms, these are the views. (The controller components are hidden in the Flask and middleware.)
+
+    * Handshaking
+
+        The Handshaking submodule handles provisioning of radios and session setup.
+
+* Calling
+
+    The Calling module communicates with murmur, the Mumble server. This is responsible for setting up Mumble accounts for each client and Mumble channels to match our channels.
+
+* Models
+
+    The Models module contains database models. These are one to one with tables in the database. The models are implemented with SQLAlchemy in the form of flask_sqlalchemy.
+
+* Tests
+
+    The Tests module contains unit and integration tests for the API and Management Console. These are implemented using Python's builtin unittest module.

@@ -1,0 +1,5 @@
+"""
+radiomanager.api.endpoints
+==========================
+
+"""
