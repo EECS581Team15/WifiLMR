@@ -1,0 +1,8 @@
+
+config BR2_PACKAGE_RADIOAPP
+	bool "radioapp"
+	depends on BR2_PACKAGE_XORG7
+	help
+	  WifiLMR radioapp.
+
+	  https://github.com/EECS581Team15/WifiLMR/
