@@ -583,7 +583,6 @@ Audio
 Wire Wire Line
 	6700 3500 6900 3500
 NoConn ~ 3500 3500
-NoConn ~ 1700 3200
 $Comp
 L power:PWR_FLAG #FLG0102
 U 1 1 5C21BC25
@@ -679,4 +678,6 @@ Text GLabel 1700 3300 0    50   Input ~ 0
 PWR_STATUS
 NoConn ~ 3500 2600
 NoConn ~ 3500 2500
+Text GLabel 1700 3200 0    50   Input ~ 0
+SW_PWR
 $EndSCHEMATC
