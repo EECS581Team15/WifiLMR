@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name SPH0645LM4H-B)(type Legacy)(uri ${KIPRJMOD}/snapeda/sph0645lm4h/SPH0645LM4H-B.mod)(options "")(descr ""))
+  (lib (name LMRHAT)(type KiCad)(uri ${KIPRJMOD}/LMRHAT.pretty)(options "")(descr ""))
+)
