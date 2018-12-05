@@ -4,7 +4,7 @@ import threading
 
 class LmrListener(object): #declare this before calling PairingScan
 
-    def __init__(self, my_ip):
+    def __init__(self):
         self.stop_searching = threading.Event()
 
     def add_service(self, zeroconf, type, name):
