@@ -9,6 +9,7 @@ routing.
 from flask import Flask
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
+from . import mdns
 
 
 class FlaskExtensions:
@@ -46,4 +47,5 @@ def create_app(config_obj=PRODUCTION_CONFIG):
 
 def init_app(is_testing=False):
     config_obj = TESTING_CONFIG if is_testing else PRODUCTION_CONFIG
+    mdns.register_service()
     return create_app(config_obj)
