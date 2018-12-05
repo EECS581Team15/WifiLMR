@@ -3,6 +3,9 @@ Radioapp.core.mumble
 ====================
 
 Adapter for the pymumble library
+
+The pymumble library used can be found here:
+https://github.com/azlux/pymumble
 """
 
 from pymumble_py3 import Mumble
