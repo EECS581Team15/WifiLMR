@@ -5,8 +5,8 @@ Radioapp.core.mumble
 Adapter for the pymumble library
 """
 
-from .pymumble.mumble import Mumble
-from .pymumble.constants import *
+from pymumble_py3 import Mumble
+from pymumble_py3.constants import *
 
 class MumbleAdapter():
     """Addaptation of pymumble api"""
@@ -52,3 +52,6 @@ class MumbleAdapter():
         if not self.mumble:
             return
         self.mumble.callbacks.set_callback(callbackConstant, callback)
+
+    def get_users(self):
+        return self.mumble.users
