@@ -31,8 +31,15 @@ class UIManager:
         self.window.pack_propagate(0)
 
     def switch_screen(self, screen_class, action_number):
-        """Switches between Screen."""
-
+        """Switches between Screen.
+        
+        Performs certain action depending on action number.
+        
+        Action number is passed down from various UI screens.
+        
+        Action number 1 is passed down from UI BackLight Screen.
+        """
+        
         if action_number == 1:
             self.current_slider_number = self.current_screen.current_slider_number
 
