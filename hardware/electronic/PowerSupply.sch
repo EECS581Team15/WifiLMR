@@ -71,7 +71,7 @@ F 3 "~" H 8000 3500 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C105974
 P 9600 4400
 AR Path="/5C105974" Ref="#PWR?"  Part="1" 
@@ -84,7 +84,7 @@ F 3 "" H 9600 4400 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C10597A
 P 8500 3950
 AR Path="/5C10597A" Ref="#PWR?"  Part="1" 
@@ -97,7 +97,7 @@ F 3 "" H 8500 3950 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C105985
 P 8000 3850
 AR Path="/5C105985" Ref="#PWR?"  Part="1" 
@@ -140,7 +140,7 @@ Wire Wire Line
 Wire Wire Line
 	9400 5550 9400 5450
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C10599F
 P 8900 6050
 AR Path="/5C10599F" Ref="#PWR?"  Part="1" 
@@ -153,7 +153,7 @@ F 3 "" H 8900 6050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1059A5
 P 8400 6050
 AR Path="/5C1059A5" Ref="#PWR?"  Part="1" 
@@ -194,7 +194,7 @@ F 3 "" H 7400 5100 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1059C9
 P 7400 5550
 AR Path="/5C1059C9" Ref="#PWR?"  Part="1" 
@@ -209,7 +209,7 @@ $EndComp
 Wire Wire Line
 	7400 5500 7400 5550
 $Comp
-L LMRHAT:+Vopt #PWR?
+L LMRHAT-rescue:+Vopt-LMRHAT #PWR?
 U 1 1 5C1059E8
 P 1800 5100
 AR Path="/5C1059E8" Ref="#PWR?"  Part="1" 
@@ -291,7 +291,7 @@ Connection ~ 9400 3800
 Wire Wire Line
 	9400 5150 9400 3800
 $Comp
-L LMRHAT:MAX40200 U?
+L LMRHAT-rescue:MAX40200-LMRHAT U?
 U 1 1 5C1058DD
 P 3700 5250
 AR Path="/5C1058DD" Ref="U?"  Part="1" 
@@ -335,7 +335,7 @@ Wire Wire Line
 Wire Wire Line
 	2300 6300 2200 6300
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C0622C2
 P 2600 6400
 AR Path="/5C0622C2" Ref="#PWR?"  Part="1" 
@@ -352,7 +352,7 @@ Wire Wire Line
 Wire Wire Line
 	2600 6300 2500 6300
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C0693A3
 P 2200 7100
 AR Path="/5C0693A3" Ref="#PWR?"  Part="1" 
@@ -369,7 +369,7 @@ Wire Wire Line
 Wire Wire Line
 	1800 5200 1800 6600
 $Comp
-L LMRHAT:+Vhandoff #PWR0124
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0124
 U 1 1 5C0889E9
 P 2200 5950
 F 0 "#PWR0124" H 2200 5800 50  0001 C CNN
@@ -409,7 +409,7 @@ Wire Wire Line
 Wire Wire Line
 	4250 5200 4000 5200
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C0DDED0
 P 4100 5500
 AR Path="/5C0DDED0" Ref="#PWR?"  Part="1" 
@@ -465,7 +465,7 @@ $EndComp
 Wire Wire Line
 	1400 2300 1800 2300
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1140D4
 P 2100 2800
 AR Path="/5C1140D4" Ref="#PWR?"  Part="1" 
@@ -493,7 +493,7 @@ F 3 "~" H 9400 5800 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C12CE12
 P 9400 6050
 AR Path="/5C12CE12" Ref="#PWR?"  Part="1" 
@@ -544,7 +544,7 @@ F 3 "~" H 1800 2150 50  0001 C CNN
 $EndComp
 Connection ~ 1800 2300
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C18B7A9
 P 1600 2000
 AR Path="/5C18B7A9" Ref="#PWR?"  Part="1" 
@@ -644,7 +644,7 @@ Wire Wire Line
 Text GLabel 6700 3700 0    39   Input ~ 0
 CHARGE_EN
 $Comp
-L LMRHAT:+Vopt #PWR?
+L LMRHAT-rescue:+Vopt-LMRHAT #PWR?
 U 1 1 5C1B8268
 P 6700 3100
 AR Path="/5C1B8268" Ref="#PWR?"  Part="1" 
@@ -661,7 +661,7 @@ Wire Wire Line
 Text Label 4500 5800 0    39   ~ 0
 PWR_EN
 $Comp
-L LMRHAT:TSM850N06CX Q3
+L LMRHAT-rescue:TSM850N06CX-LMRHAT Q3
 U 1 1 5C1CC748
 P 2550 5300
 F 0 "Q3" V 2893 5300 50  0000 C CNN
@@ -702,7 +702,7 @@ Connection ~ 2900 4000
 Wire Wire Line
 	2900 4000 2900 5200
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1EA973
 P 2500 4300
 AR Path="/5C1EA973" Ref="#PWR?"  Part="1" 
@@ -717,7 +717,7 @@ $EndComp
 Wire Wire Line
 	2500 4300 2500 4200
 $Comp
-L LMRHAT:+Vhandoff #PWR0149
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0149
 U 1 1 5C1ED985
 P 1900 3600
 F 0 "#PWR0149" H 1900 3450 50  0001 C CNN
@@ -760,7 +760,7 @@ F 3 "~" H 5500 1900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:+Vhandoff #PWR0150
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0150
 U 1 1 5C1F7656
 P 5000 1700
 F 0 "#PWR0150" H 5000 1550 50  0001 C CNN
@@ -771,7 +771,7 @@ F 3 "" H 5000 1700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:+Vhandoff #PWR0151
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0151
 U 1 1 5C1F776D
 P 5500 1700
 F 0 "#PWR0151" H 5500 1550 50  0001 C CNN
@@ -782,7 +782,7 @@ F 3 "" H 5500 1700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1F77D8
 P 5000 2100
 AR Path="/5C1F77D8" Ref="#PWR?"  Part="1" 
@@ -795,7 +795,7 @@ F 3 "" H 5000 2100 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LMRHAT:GND #PWR?
+L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1F7961
 P 5500 2100
 AR Path="/5C1F7961" Ref="#PWR?"  Part="1" 
@@ -820,7 +820,7 @@ Power Switch Debouncer
 Text Notes 3150 7100 0    39   ~ 0
 Note:\nCHARGE_EN is HIGH when Vopt exceeds BATT+. This signals\nthat the Pi is being powered by an external source, so the\nbattery should be disconnected and the charger enabled.
 $Comp
-L LMRHAT:+Vhandoff #PWR0139
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0139
 U 1 1 5C20F628
 P 1500 2800
 F 0 "#PWR0139" H 1500 2650 50  0001 C CNN
@@ -836,7 +836,7 @@ Wire Wire Line
 	1400 2400 1800 2400
 Connection ~ 1800 2400
 $Comp
-L LMRHAT:+Vhandoff #PWR0147
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0147
 U 1 1 5C23087A
 P 4200 2000
 F 0 "#PWR0147" H 4200 1850 50  0001 C CNN
@@ -849,7 +849,7 @@ $EndComp
 Wire Wire Line
 	4200 2250 4200 2000
 $Comp
-L LMRHAT:+Vhandoff #PWR0148
+L LMRHAT-rescue:+Vhandoff-LMRHAT #PWR0148
 U 1 1 5C23A73B
 P 3500 1850
 F 0 "#PWR0148" H 3500 1700 50  0001 C CNN
@@ -864,7 +864,7 @@ Wire Wire Line
 Wire Wire Line
 	9600 3900 9600 4400
 $Comp
-L LMRHAT:+3.3V #PWR0145
+L LMRHAT-rescue:+3.3V-LMRHAT #PWR0145
 U 1 1 5C044873
 P 9200 2850
 F 0 "#PWR0145" H 9200 2700 50  0001 C CNN
