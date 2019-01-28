@@ -12,7 +12,7 @@ from pymumble_py3 import Mumble
 from pymumble_py3.constants import *
 
 class MumbleAdapter():
-    """Addaptation of pymumble api"""
+    """Adaptation of pymumble api"""
 
     def __init__(self):
         self.mumble = None
