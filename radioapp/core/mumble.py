@@ -58,3 +58,6 @@ class MumbleAdapter():
 
     def get_users(self):
         return self.mumble.users
+
+    def get_channels(self):
+        return self.mumble.channels
