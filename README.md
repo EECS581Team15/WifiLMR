@@ -15,3 +15,12 @@ Getting Started
     * **radioapp**: $REPO/env-app (`virtualenv env-app`)
 6. Enter the environment for the project you're working on (`source env-$PROJ/bin/activate`)
 7. Restore the project dependencies (`pip install -r requirements.txt` in the corresponding folder)
+
+### Radio Firmware
+
+1. Sync git submodules (`git submodule init && git submodule update`)
+2. Enter the `boardsupport/buildroot directory`
+3. Execute `make BR2_EXTERNAL=../bsp wifilmr_defconfig`
+4. Execute `make`
+5. Go get coffee.
+6. Write `boardsupport/buildroot/output/images/sdcard.img` to a MicroSD card.

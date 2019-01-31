@@ -1,0 +1,3 @@
+[submodule "Buildroot"]
+	path = boardsupport/buildroot
+	url = git://git.buildroot.net/buildroot
