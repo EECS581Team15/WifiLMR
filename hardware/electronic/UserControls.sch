@@ -17,16 +17,16 @@ $EndDescr
 $Comp
 L LMRHAT-rescue:GND-LMRHAT #PWR0110
 U 1 1 5C02E7BF
-P 1550 4950
-F 0 "#PWR0110" H 1550 4700 50  0001 C CNN
-F 1 "GND" H 1555 4777 50  0000 C CNN
-F 2 "" H 1550 4950 50  0000 C CNN
-F 3 "" H 1550 4950 50  0000 C CNN
-	1    1550 4950
+P 1650 4950
+F 0 "#PWR0110" H 1650 4700 50  0001 C CNN
+F 1 "GND" H 1655 4777 50  0000 C CNN
+F 2 "" H 1650 4950 50  0000 C CNN
+F 3 "" H 1650 4950 50  0000 C CNN
+	1    1650 4950
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1550 4950 1550 4750
+	1650 4950 1650 4750
 $Comp
 L Device:R_US R5
 U 1 1 5C02E7C6
@@ -91,7 +91,7 @@ U 1 1 5C02E7F2
 P 3100 3000
 F 0 "SW1" H 3100 3285 50  0000 C CNN
 F 1 "BTN_LEFT" H 3100 3194 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_PTS645" H 3100 3200 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H5mm" H 3100 3200 50  0001 C CNN
 F 3 "" H 3100 3200 50  0001 C CNN
 	1    3100 3000
 	1    0    0    -1  
@@ -102,7 +102,7 @@ U 1 1 5C02E7F9
 P 3100 2400
 F 0 "SW3" H 3100 2685 50  0000 C CNN
 F 1 "BTN_SELECT" H 3100 2594 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_PTS645" H 3100 2600 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H5mm" H 3100 2600 50  0001 C CNN
 F 3 "" H 3100 2600 50  0001 C CNN
 	1    3100 2400
 	1    0    0    -1  
@@ -113,7 +113,7 @@ U 1 1 5C02E800
 P 3100 3600
 F 0 "SW5" H 3100 3885 50  0000 C CNN
 F 1 "BTN_RIGHT" H 3100 3794 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_PTS645" H 3100 3800 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H5mm" H 3100 3800 50  0001 C CNN
 F 3 "" H 3100 3800 50  0001 C CNN
 	1    3100 3600
 	1    0    0    -1  
@@ -124,7 +124,7 @@ U 1 1 5C02E807
 P 3100 1800
 F 0 "SW4" H 3100 2085 50  0000 C CNN
 F 1 "BTN_DOWN" H 3100 1994 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_PTS645" H 3100 2000 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H5mm" H 3100 2000 50  0001 C CNN
 F 3 "https://www.ckswitches.com/media/1471/pts645.pdf" H 3100 2000 50  0001 C CNN
 	1    3100 1800
 	1    0    0    -1  
@@ -275,17 +275,6 @@ D-pad
 Text Notes 950  800  0    157  ~ 31
 User Controls
 $Comp
-L Connector:Conn_01x06_Male J4
-U 1 1 5C02E89A
-P 1650 4550
-F 0 "J4" V 1590 4262 50  0000 R CNN
-F 1 "Top Controls" V 1499 4262 50  0000 R CNN
-F 2 "Connector_JST:JST_EH_B06B-EH-A_1x06_P2.50mm_Vertical" H 1650 4550 50  0001 C CNN
-F 3 "http://www.jst-mfg.com/product/pdf/eng/eEH.pdf" H 1650 4550 50  0001 C CNN
-	1    1650 4550
-	0    1    1    0   
-$EndComp
-$Comp
 L LMRHAT-rescue:MCP23008_SO-adafruit U8
 U 1 1 5C02E8A1
 P 3400 5500
@@ -296,17 +285,17 @@ F 3 "" H 3400 5500 50  0001 C CNN
 	1    3400 5500
 	1    0    0    -1  
 $EndComp
-Text GLabel 4250 5700 2    50   Input ~ 0
-BTN_PTT
-Text GLabel 4250 5200 2    50   Input ~ 0
-BTN_SELECT
-Text GLabel 4250 5300 2    50   Input ~ 0
-BTN_LEFT
-Text GLabel 4250 5400 2    50   Input ~ 0
-BTN_RIGHT
-Text GLabel 4250 5500 2    50   Input ~ 0
-BTN_UP
 Text GLabel 4250 5600 2    50   Input ~ 0
+BTN_PTT
+Text GLabel 4250 5300 2    50   Input ~ 0
+BTN_SELECT
+Text GLabel 4250 5500 2    50   Input ~ 0
+BTN_LEFT
+Text GLabel 4250 5200 2    50   Input ~ 0
+BTN_RIGHT
+Text GLabel 4250 5100 2    50   Input ~ 0
+BTN_UP
+Text GLabel 4250 5400 2    50   Input ~ 0
 BTN_DOWN
 Wire Wire Line
 	4000 5200 4250 5200
@@ -314,10 +303,6 @@ Wire Wire Line
 	4000 5300 4250 5300
 Wire Wire Line
 	4000 5400 4250 5400
-Wire Wire Line
-	4000 5500 4250 5500
-Wire Wire Line
-	4000 5600 4250 5600
 $Comp
 L power:+3.3V #Vpi0103
 U 1 1 5C02E8B4
@@ -546,7 +531,7 @@ Text GLabel 2700 5500 0    50   Input ~ 0
 SDA
 Text GLabel 2700 5600 0    50   Input ~ 0
 SCL
-NoConn ~ 4000 5100
+NoConn ~ 4000 5700
 NoConn ~ 1850 750 
 $Comp
 L Device:C_Small C?
@@ -564,7 +549,6 @@ F 3 "~" H 2400 4800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	2800 4700 3400 4700
-Connection ~ 3400 4700
 Wire Wire Line
 	2400 4700 2800 4700
 Connection ~ 2800 4700
@@ -644,10 +628,6 @@ F 3 "http://www.jst-mfg.com/product/pdf/eng/eEH.pdf" H 1200 1250 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	1650 5400 1650 4750
-Wire Wire Line
-	1350 5400 1650 5400
-Wire Wire Line
 	1750 5700 1750 4750
 Wire Wire Line
 	1350 5700 1750 5700
@@ -663,8 +643,8 @@ U 1 1 5C02E7EB
 P 3100 1200
 F 0 "SW2" H 3100 1485 50  0000 C CNN
 F 1 "BTN_UP" H 3100 1394 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_PTS645" H 3100 1400 50  0001 C CNN
-F 3 "https://www.ckswitches.com/media/1471/pts645.pdf" H 3100 1400 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm_H5mm" H 3100 1400 50  0001 C CNN
+F 3 "" H 3100 1400 50  0001 C CNN
 	1    3100 1200
 	1    0    0    -1  
 $EndComp
@@ -725,6 +705,26 @@ Wire Wire Line
 	1200 1450 1200 1900
 Wire Wire Line
 	1300 1900 1300 1850
+Connection ~ 3400 4700
 Wire Wire Line
-	4000 5700 4250 5700
+	4000 5100 4250 5100
+Wire Wire Line
+	4000 5500 4250 5500
+Wire Wire Line
+	4250 5600 4000 5600
+$Comp
+L Connector:Conn_01x06_Male J4
+U 1 1 5C02E89A
+P 1650 4550
+F 0 "J4" V 1590 4262 50  0000 R CNN
+F 1 "Top Controls" V 1499 4262 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 1650 4550 50  0001 C CNN
+F 3 "" H 1650 4550 50  0001 C CNN
+	1    1650 4550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1350 5400 1550 5400
+Wire Wire Line
+	1550 5400 1550 4750
 $EndSCHEMATC

@@ -63,13 +63,13 @@ Text GLabel 3500 3200 2    50   Input ~ 0
 SCK
 Text GLabel 3500 2900 2    50   Input ~ 0
 LCD_CS
-Text GLabel 1700 3400 0    50   Input ~ 0
+Text GLabel 3500 2600 2    50   Input ~ 0
 CHAN_A
-Text GLabel 1700 3000 0    50   Input ~ 0
+Text GLabel 3500 3500 2    50   Input ~ 0
 CHAN_B
-Text GLabel 3500 2400 2    50   Input ~ 0
+Text GLabel 3500 1900 2    50   Input ~ 0
 VOL_A
-Text GLabel 1700 2200 0    50   Input ~ 0
+Text GLabel 3500 2500 2    50   Input ~ 0
 VOL_B
 Text GLabel 1700 2900 0    50   Input ~ 0
 INT_BTN
@@ -122,7 +122,7 @@ Wire Wire Line
 	1800 1900 1400 1900
 Wire Wire Line
 	1400 1900 1400 1300
-NoConn ~ 3400 1900
+NoConn ~ 1800 2200
 NoConn ~ 3400 1800
 Wire Wire Line
 	3500 2100 3400 2100
@@ -145,15 +145,11 @@ Wire Wire Line
 Wire Wire Line
 	1700 2900 1800 2900
 Wire Wire Line
-	1700 3000 1800 3000
-Wire Wire Line
 	1700 3100 1800 3100
 Wire Wire Line
 	1700 3200 1800 3200
 Wire Wire Line
 	1700 3300 1800 3300
-Wire Wire Line
-	1700 3400 1800 3400
 Wire Wire Line
 	2200 4000 2200 4100
 Wire Wire Line
@@ -208,8 +204,6 @@ Wire Wire Line
 Wire Wire Line
 	3400 3500 3500 3500
 Wire Wire Line
-	3400 2400 3500 2400
-Wire Wire Line
 	3400 2500 3500 2500
 Wire Wire Line
 	3400 2600 3500 2600
@@ -217,8 +211,6 @@ Wire Wire Line
 	3400 2800 3500 2800
 Wire Wire Line
 	1700 2100 1800 2100
-Wire Wire Line
-	1700 2200 1800 2200
 Wire Wire Line
 	2400 1400 2400 1300
 Wire Wire Line
@@ -328,7 +320,7 @@ F 3 "" H 8300 2700 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6900 2100 7100 2100
+	6900 2100 7000 2100
 $Comp
 L LMRHAT-rescue:GND-LMRHAT #PWR0103
 U 1 1 5C1DD324
@@ -484,7 +476,7 @@ Wire Wire Line
 Wire Wire Line
 	6800 4050 6800 4150
 Wire Wire Line
-	8300 2100 8300 2500
+	8300 2100 8300 2200
 Wire Wire Line
 	7100 2600 7050 2600
 Wire Wire Line
@@ -582,7 +574,7 @@ Text Notes 6550 1500 0    157  ~ 31
 Audio
 Wire Wire Line
 	6700 3500 6900 3500
-NoConn ~ 3500 3500
+NoConn ~ 1800 3000
 $Comp
 L power:PWR_FLAG #FLG0102
 U 1 1 5C21BC25
@@ -660,7 +652,6 @@ F 3 "" H 1200 6450 60  0001 C CNN
 $EndComp
 Wire Wire Line
 	6800 2200 7100 2200
-NoConn ~ 7100 2000
 $Comp
 L Device:R_US R2
 U 1 1 5BFB7A71
@@ -676,8 +667,97 @@ Text GLabel 1700 2100 0    50   Input ~ 0
 BATT_CHARGE
 Text GLabel 1700 3300 0    50   Input ~ 0
 PWR_STATUS
-NoConn ~ 3500 2600
-NoConn ~ 3500 2500
+NoConn ~ 1800 3400
+NoConn ~ 3400 2400
 Text GLabel 1700 3200 0    50   Input ~ 0
 SW_PWR
+Wire Wire Line
+	3500 1900 3400 1900
+Wire Wire Line
+	6900 2100 6900 2000
+Wire Wire Line
+	6900 2000 7100 2000
+Connection ~ 6900 2100
+Wire Wire Line
+	7100 2300 7000 2300
+Wire Wire Line
+	7000 2300 7000 2100
+Connection ~ 7000 2100
+Wire Wire Line
+	7000 2100 7100 2100
+Wire Wire Line
+	7100 2400 7000 2400
+Wire Wire Line
+	7000 2400 7000 2300
+Connection ~ 7000 2300
+Wire Wire Line
+	8150 2200 8300 2200
+Connection ~ 8300 2200
+Wire Wire Line
+	8300 2200 8300 2300
+Wire Wire Line
+	8150 2300 8300 2300
+Connection ~ 8300 2300
+Wire Wire Line
+	8300 2300 8300 2500
+Text GLabel 9300 2150 0    50   Input ~ 0
+PCM_DOUT
+Text GLabel 9300 2250 0    50   Input ~ 0
+PCM_DIN
+Text GLabel 9300 2350 0    50   Input ~ 0
+PCM_CLK
+Text GLabel 9300 2450 0    50   Input ~ 0
+PCM_FS
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5C569EF1
+P 9400 2150
+F 0 "TP1" V 9354 2337 50  0000 L CNN
+F 1 " " V 9445 2337 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9600 2150 50  0001 C CNN
+F 3 "~" H 9600 2150 50  0001 C CNN
+	1    9400 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5C569FDC
+P 9400 2250
+F 0 "TP2" V 9354 2438 50  0000 L CNN
+F 1 " " V 9445 2438 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9600 2250 50  0001 C CNN
+F 3 "~" H 9600 2250 50  0001 C CNN
+	1    9400 2250
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5C56A065
+P 9400 2350
+F 0 "TP3" V 9354 2538 50  0000 L CNN
+F 1 " " V 9445 2538 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9600 2350 50  0001 C CNN
+F 3 "~" H 9600 2350 50  0001 C CNN
+	1    9400 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP4
+U 1 1 5C56A0EE
+P 9400 2450
+F 0 "TP4" V 9354 2637 50  0000 L CNN
+F 1 " " V 9445 2637 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9600 2450 50  0001 C CNN
+F 3 "~" H 9600 2450 50  0001 C CNN
+	1    9400 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9400 2450 9300 2450
+Wire Wire Line
+	9300 2350 9400 2350
+Wire Wire Line
+	9400 2250 9300 2250
+Wire Wire Line
+	9300 2150 9400 2150
 $EndSCHEMATC

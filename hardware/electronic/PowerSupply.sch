@@ -664,6 +664,8 @@ $Comp
 L LMRHAT-rescue:TSM850N06CX-LMRHAT Q3
 U 1 1 5C1CC748
 P 2550 5300
+AR Path="/5C1CC748" Ref="Q3"  Part="1" 
+AR Path="/5C0F7799/5C1CC748" Ref="Q3"  Part="1" 
 F 0 "Q3" V 2893 5300 50  0000 C CNN
 F 1 "TSM850N06CX" V 2802 5300 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23_Handsoldering" H 2750 5200 50  0001 L CIN
@@ -700,7 +702,7 @@ Wire Wire Line
 	2900 3800 2900 4000
 Connection ~ 2900 4000
 Wire Wire Line
-	2900 4000 2900 5200
+	2900 4000 2900 4600
 $Comp
 L LMRHAT-rescue:GND-LMRHAT #PWR?
 U 1 1 5C1EA973
@@ -867,6 +869,8 @@ $Comp
 L LMRHAT-rescue:+3.3V-LMRHAT #PWR0145
 U 1 1 5C044873
 P 9200 2850
+AR Path="/5C044873" Ref="#PWR0145"  Part="1" 
+AR Path="/5C0F7799/5C044873" Ref="#PWR0145"  Part="1" 
 F 0 "#PWR0145" H 9200 2700 50  0001 C CNN
 F 1 "+3.3V" H 9215 3023 50  0000 C CNN
 F 2 "" H 9200 2850 50  0000 C CNN
@@ -874,4 +878,103 @@ F 3 "" H 9200 2850 50  0000 C CNN
 	1    9200 2850
 	1    0    0    -1  
 $EndComp
+Text GLabel 5450 4250 0    39   Input ~ 0
+CHARGE_EN
+Text GLabel 5450 4350 0    50   Input ~ 0
+PWR_STATUS
+Text GLabel 5450 4450 0    50   Input ~ 0
+SW_PWR
+$Comp
+L Connector:TestPoint TP11
+U 1 1 5C576412
+P 9600 5550
+F 0 "TP11" V 9554 5738 50  0000 L CNN
+F 1 " " V 9645 5738 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9800 5550 50  0001 C CNN
+F 3 "~" H 9800 5550 50  0001 C CNN
+	1    9600 5550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9600 5550 9400 5550
+Text GLabel 5450 4550 0    50   Input ~ 0
+BATT_CHARGE
+$Comp
+L Connector:TestPoint TP6
+U 1 1 5C578C68
+P 2900 4600
+F 0 "TP6" V 2854 4788 50  0000 L CNN
+F 1 " " V 2945 4788 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 3100 4600 50  0001 C CNN
+F 3 "~" H 3100 4600 50  0001 C CNN
+	1    2900 4600
+	0    1    1    0   
+$EndComp
+Connection ~ 2900 4600
+Wire Wire Line
+	2900 4600 2900 5200
+$Comp
+L Connector:TestPoint TP5
+U 1 1 5C578E00
+P 1900 3800
+F 0 "TP5" V 2000 3950 50  0000 C CNN
+F 1 " " V 2004 3874 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 2100 3800 50  0001 C CNN
+F 3 "~" H 2100 3800 50  0001 C CNN
+	1    1900 3800
+	0    -1   -1   0   
+$EndComp
+Connection ~ 1900 3800
+$Comp
+L Connector:TestPoint TP7
+U 1 1 5C57919C
+P 5550 4250
+F 0 "TP7" V 5504 4438 50  0000 L CNN
+F 1 " " V 5595 4438 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 5750 4250 50  0001 C CNN
+F 3 "~" H 5750 4250 50  0001 C CNN
+	1    5550 4250
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP8
+U 1 1 5C579272
+P 5550 4350
+F 0 "TP8" V 5504 4538 50  0000 L CNN
+F 1 " " V 5595 4538 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 5750 4350 50  0001 C CNN
+F 3 "~" H 5750 4350 50  0001 C CNN
+	1    5550 4350
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP9
+U 1 1 5C5792C0
+P 5550 4450
+F 0 "TP9" V 5504 4638 50  0000 L CNN
+F 1 " " V 5595 4638 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 5750 4450 50  0001 C CNN
+F 3 "~" H 5750 4450 50  0001 C CNN
+	1    5550 4450
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP10
+U 1 1 5C579308
+P 5550 4550
+F 0 "TP10" V 5504 4738 50  0000 L CNN
+F 1 " " V 5595 4738 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 5750 4550 50  0001 C CNN
+F 3 "~" H 5750 4550 50  0001 C CNN
+	1    5550 4550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5550 4550 5450 4550
+Wire Wire Line
+	5450 4450 5550 4450
+Wire Wire Line
+	5550 4350 5450 4350
+Wire Wire Line
+	5450 4250 5550 4250
 $EndSCHEMATC
