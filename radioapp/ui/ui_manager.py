@@ -13,7 +13,7 @@ class UIManager:
 
         self.initialize_window()
 
-        self.switch_screen(self.display_home, 0)
+        self.switch_screen(self.display_home)
 
     def display_home(self):
         """Displays the Home screen."""
@@ -30,18 +30,8 @@ class UIManager:
         self.window.resizable(0, 0)
         self.window.pack_propagate(0)
 
-    def switch_screen(self, screen_class, action_number):
-        """Switches between Screen.
-        
-        Performs certain action depending on action number.
-        
-        Action number is passed down from various UI screens.
-        
-        Action number 1 is passed down from UI BackLight Screen.
-        """
-        
-        if action_number == 1:
-            self.current_slider_number = self.current_screen.current_slider_number
+    def switch_screen(self, screen_class):
+        """Switches between Screen."""
 
         if self.current_screen is not None:
             self.current_screen.destroy_screen()
