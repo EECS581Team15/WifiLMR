@@ -31,13 +31,13 @@ class UIHome:
         self.bottom_frame = tk.Frame(self.my_frame, bg="yellow")
         self.bottom_frame.pack(side="bottom", fill="x")
 
-        self.button_1 = tk.Button(self.bottom_frame, text="1", bg="#3399ff", fg="white", height=1, width=3
+        self.button_1 = tk.Button(self.bottom_frame, text="1", bg="#3399ff", fg="white", height=1, width=3)
         self.button_1.grid(row=7, column=0, sticky="nsew")
 
-        self.button_2 = tk.Button(self.bottom_frame, text="2", height=1, width=3 fg="white", bg="#3399ff")
+        self.button_2 = tk.Button(self.bottom_frame, text="2", height=1, width=3, fg="white", bg="#3399ff")
         self.button_2.grid(row=7, column=1, sticky="nsew")
 
-        self.button_3 = tk.Button(self.bottom_frame, text="3", height=1, width=4 fg="white", bg="#3399ff")
+        self.button_3 = tk.Button(self.bottom_frame, text="3", height=1, width=4, fg="white", bg="#3399ff")
         self.button_3.grid(row=7, column=2, sticky="nsew")
 
     def add_middle(self):
