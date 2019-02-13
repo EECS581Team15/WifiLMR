@@ -11,4 +11,5 @@ Adding a New Splash Screen
 --------------------------
 
 The splash screen is read from /boot/splash.bmp. This is part of
-`rootfs_overlay`. The image should be 160x128 pixels.
+`rootfs_overlay`. The image should be 160x128 pixels. This **must** be an older
+format BMP (BMP3 or earlier) or `fbv` won't be able to read it.
