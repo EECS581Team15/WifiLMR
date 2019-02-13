@@ -18,10 +18,17 @@ endef
 
 # Remove the .stamp_extracted to force buildroot to use the current version of radioapp
 define RADIOAPP_REMOVE_EXTRACT_STAMP
+	rm -vf $(BASE_DIR)/build/radioapp-$(RADIOAPP_VERSION)/.stamp_downloaded
 	rm -vf $(BASE_DIR)/build/radioapp-$(RADIOAPP_VERSION)/.stamp_extracted
 endef
 
-RADIOAPP_PRE_EXTRACT_HOOKS += RADIOAPP_BUILD_SRC
+# Make the init script executable
+define RADIOAPP_MAKE_INIT_SCRIPT_EXEC
+	chmod +x $(BASE_DIR)/target/etc/init.d/S91radioapp.sh
+endef
+
+RADIOAPP_PRE_DOWNLOAD_HOOKS += RADIOAPP_BUILD_SRC
+RADIOAPP_POST_INSTALL_TARGET_HOOKS += RADIOAPP_MAKE_INIT_SCRIPT_EXEC
 RADIOAPP_SITE = file://$(BR2_DL_DIR)/../../../radioapp/dist
 RADIOAPP_SOURCE = radioapp-$(RADIOAPP_VERSION).tar.gz
 RADIOAPP_SETUP_TYPE = setuptools
