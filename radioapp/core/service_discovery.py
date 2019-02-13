@@ -12,14 +12,15 @@ multicast DNS (mDNS).
 from zeroconf import ServiceBrowser, Zeroconf
 import logging
 
+
 class BackendDiscovery:
 
     def __init__(self, callbackadd, callbackremove):
         self.zeroconf = Zeroconf()
-        self.servicebrowser = None
+        self.SERVICEBROWSER = None
         self.listener = LmrListener(callbackadd, callbackremove)
 
-    class LmrListener: #declare this before calling PairingScan
+    class LmrListener:  # declare this before calling PairingScan
 
         def __init__(self, callbackadd, callbackremove):
             self.callbackadd = callbackadd
@@ -32,11 +33,13 @@ class BackendDiscovery:
 
         def add_service(self, zeroconf, type, name):
             info = zeroconf.get_service_info(type, name)
-            self.logger.debug("Service %s added, service info: %s" % (name, info))
+            self.logger.debug(
+                "Service %s added, service info: %s" % (name, info))
             self.callbackadd(name, info)
 
     def start(self):
-        self.servicebrowser = ServiceBrowser(self.zeroconf, "WifiLMR._tcp.local.", self.listener)
+        self.SERBVICEBROWSER = ServiceBrowser(
+            self.zeroconf, "WifiLMR._tcp.local.", self.listener)
 
     def stop(self):
         self.zeroconf.close()
