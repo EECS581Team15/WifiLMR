@@ -38,7 +38,7 @@ class BackendDiscovery:
 
     def start(self):
         self.SERBVICEBROWSER = ServiceBrowser(
-            self.zeroconf, "WifiLMR._tcp.local.", self.listener)
+            self.zeroconf, "_wifilmr_api._tcp.local.", self.listener)
 
     def stop(self):
         self.zeroconf.close()
