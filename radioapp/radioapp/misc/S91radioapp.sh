@@ -3,12 +3,13 @@
 # Based on the Buildroot/Busybox logging init script
 #
 
-RADIOAPP=/usr/lib/python3.6/site-packages/radioapp/main.py
+export DISPLAY=:0.0
+RADIOAPP=/usr/lib/python3.6/site-packages/radioapp/main.pyc
 RADIOAPP_ARGS=""
 
 start() {
 	printf "Starting radioapp: "
-	start-stop-daemon -b -p /var/run/radioapp.pid --exec /usr/bin/python3 -- $RADIOAPP $RADIOAPP_ARGS
+	start-stop-daemon -S -b -p /var/run/radioapp.pid --exec /usr/bin/python3 -- $RADIOAPP $RADIOAPP_ARGS
 	echo "OK"
 }
 

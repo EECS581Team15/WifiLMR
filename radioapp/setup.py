@@ -8,8 +8,8 @@ setuptools.setup(
     url="https://github.com/EECS581Team15/WifiLMR/",
     packages=setuptools.find_packages(),
     data_files=[
-        ("{}/target/etc/init.d/S90radioapp.sh"
+        ("{}/target/etc/init.d/"
          .format(os.environ["BASE_DIR"]),
-            ["radioapp/misc/init_script.sh"])
+            ["radioapp/misc/S91radioapp.sh"])
     ]
 )
