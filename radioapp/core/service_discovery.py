@@ -37,7 +37,7 @@ class BackendDiscovery:
         self.listener = self.LmrListener(callbackadd, callbackremove)
 
     def start(self):
-        self.SERBVICEBROWSER = ServiceBrowser(
+        self.SERVICEBROWSER = ServiceBrowser(
             self.zeroconf, "_wifilmr_api._tcp.local.", self.listener)
 
     def stop(self):
