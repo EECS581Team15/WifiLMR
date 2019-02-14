@@ -14,12 +14,6 @@ import logging
 
 
 class BackendDiscovery:
-
-    def __init__(self, callbackadd, callbackremove):
-        self.zeroconf = Zeroconf()
-        self.SERVICEBROWSER = None
-        self.listener = LmrListener(callbackadd, callbackremove)
-
     class LmrListener:  # declare this before calling PairingScan
 
         def __init__(self, callbackadd, callbackremove):
@@ -36,6 +30,11 @@ class BackendDiscovery:
             self.logger.debug(
                 "Service %s added, service info: %s" % (name, info))
             self.callbackadd(name, info)
+
+    def __init__(self, callbackadd, callbackremove):
+        self.zeroconf = Zeroconf()
+        self.SERVICEBROWSER = None
+        self.listener = self.LmrListener(callbackadd, callbackremove)
 
     def start(self):
         self.SERBVICEBROWSER = ServiceBrowser(
