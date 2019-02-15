@@ -6,10 +6,14 @@ import atexit
 mainloop = dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
 
+class AvahiIface(enum.IntEnum):
+    UNSPEC = -1
+
+
 class AvahiProto(enum.IntEnum):
     INET = 0
     INET6 = 1
-    UPSPEC = -1
+    UNSPEC = -1
 
 
 class AvahiConnection:
@@ -65,7 +69,7 @@ SERVICE_PATH = "_wifilmr_api._tcp"
 SERVICE_NAME = "WiFiLMR API"
 
 
-def register_service(iface=None, service_port=8000, extra_txt=""):
+def register_service(service_port=8000, extra_txt=""):
     global __entry
     if __entry is not None:
         raise RuntimeError("EntryGroup already created")
@@ -73,20 +77,16 @@ def register_service(iface=None, service_port=8000, extra_txt=""):
     domain_name = conn.domain_name
     hostname = conn.hostname_fqdn
 
-    interfaces = conn.get_interfaces() if iface is None else \
-        [conn.get_network_interface_index_by_name(iface)]
-
     __entry = conn.create_entry_group()
-    for iface_index in interfaces:
-        __entry.AddService(iface_index,
-                           AvahiProto.UPSPEC,
-                           0,
-                           SERVICE_NAME,
-                           SERVICE_PATH,
-                           domain_name,
-                           hostname,
-                           service_port,
-                           extra_txt)
+    __entry.AddService(AvahiIface.UNSPEC,
+                       AvahiProto.UNSPEC,
+                       0,
+                       SERVICE_NAME,
+                       SERVICE_PATH,
+                       domain_name,
+                       hostname,
+                       service_port,
+                       extra_txt)
     __entry.Commit()
 
 

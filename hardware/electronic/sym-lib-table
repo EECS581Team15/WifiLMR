@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name LMRHAT-rescue)(type Legacy)(uri ${KIPRJMOD}/LMRHAT-rescue.lib)(options "")(descr ""))
+)
