@@ -17,7 +17,7 @@ class MumbleAdapter():
     def __init__(self):
         self.mumble = None
 
-    def initialize(self, host, user, port=64738, password='', certfile=None, keyfile=None, reconnect=True, tokens=[], debug=True):
+    def initialize(self, host, user, port=64738, password='', certfile=None, keyfile=None, reconnect=True, tokens=[], debug=False):
         """
         Creates/initializes the Mumble object
         """
