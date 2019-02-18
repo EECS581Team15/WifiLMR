@@ -62,21 +62,24 @@ class TestDriver():
 
     def collect_audio(self):
         import pyaudio
+        import itertools
         
         p = pyaudio.PyAudio()
-
+        CHUNK = 1920 * 2
         stream = p.open(format=pyaudio.paInt16,
                                     channels=1,
                                     rate=48000,
-                                    output=True)
+                                    output=True,
+                                    frames_per_buffer=CHUNK)
             #self.stream.start_stream()
-        while True:
-            sound = self.queue.get()
-            if sound is None:
-                time.sleep(.5)
+        sound = bytes()
+        for x in itertools.repeat(1):
+            sound += self.queue.get()
+            if len(sound) < CHUNK:
+                stream.write(chr(0)*2*CHUNK)
             else:
-                #self.pa.write(sound)
-                stream.write(sound[:1024])
+                stream.write(sound)
+                sound = bytes()
                 
         
                 
