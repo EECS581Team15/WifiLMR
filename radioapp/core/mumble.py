@@ -32,8 +32,10 @@ class MumbleAdapter():
             return
         self.mumble.set_application_string("Radio?")
         self.mumble.start()
-        self.mumble.is_ready()
         callback()
+    
+    def connect(self, callback):
+        self.set_mumble_callback(PYMUMBLE_CLBK_CONNECTED, callback)
 
     def set_mumble_callback(self, callbackConstant, callback):
         """
