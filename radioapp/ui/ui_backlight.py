@@ -43,7 +43,7 @@ class UIBackLight:
 
         self.bottom_label = tk.Label(self.my_frame, bg="#3399ff")
         self.bottom_label.grid(row=4)
-        self.save_button = tk.Button(self.my_frame, text="Save and Go Back", fg="white", bg="#3399ff", width=22,
+        self.save_button = tk.Button(self.my_frame, text="Save and Go Back", fg="white", bg="#3399ff", width=19,
                                      font="Helvetica 9", command=lambda: self.save_and_switch(master))
         self.save_button.grid(row=5)
 
