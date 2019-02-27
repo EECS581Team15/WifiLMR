@@ -6,7 +6,7 @@ import logging
 import os
 
 PWM_PREFIX = "/sys/class/pwm/pwmchip0/"
-PERIOD = 100000000 # nanoseconds
+PERIOD = 1000000 # 1000Hz as nanoseconds
 
 class Backlight:
     def __init__(self):
@@ -19,13 +19,16 @@ class Backlight:
             self.logger.error("PWM not found")
         else:
             self.logger.debug("PWM found")
-            with open(PWM_PREFIX+"export", 'w') as export:
-                export.write('0')
-            with open(PWM_PREFIX+"period", 'w') as period:
+            try:
+                os.stat(PWM_PREFIX+"pwm0") # check if pwm0 is already exported
+            except FileNotFoundError:
+                with open(PWM_PREFIX+"export", 'w') as export:
+                    export.write('0')
+            with open(PWM_PREFIX+"pwm0/period", 'w') as period:
                 period.write(str(PERIOD))
-            with open(PWM_PREFIX+"enable", 'w') as enable:
+            with open(PWM_PREFIX+"pwm0/enable", 'w') as enable:
                 enable.write('1')
-            self.duty_cycle = open(PWM_PREFIX+"duty_cycle")
+            self.duty_cycle = open(PWM_PREFIX+"pwm0/duty_cycle", 'w')
     def set_level(self, percentage):
         """
         Sets the backlight to a percentage [0-100]
