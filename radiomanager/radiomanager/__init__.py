@@ -7,21 +7,10 @@ routing.
 """
 
 from flask import Flask, render_template
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
 from . import mdns
-
-class FlaskExtensions:
-    """
-    """
-    db = SQLAlchemy()
-    api = Api()
-
-    @classmethod
-    def reset(cls):
-        # cls.db = SQLAlchemy()
-        cls.api = Api()
-
+from . import FlaskExtensions
+from .models.device import Device
+import sys
 
 class PRODUCTION_CONFIG:
     TESTING = False
@@ -44,7 +33,8 @@ def create_app(config_obj=TESTING_CONFIG):
         FlaskExtensions.db.create_all()
     @app.route('/')
     def homepage():
-        return render_template('console.html')
+        print(Device.query.first().name, file=sys.stderr)
+        return render_template('console.html', deviceList=Device.query.all())
     return app
 
 

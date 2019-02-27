@@ -5,6 +5,7 @@ radiomanager.api.endpoints.handshaking
 Endpoints for pinging the backend, provisioning, and registering/deregistering
 """
 
+import sys
 import uuid
 import re
 import sqlalchemy.exc
@@ -92,10 +93,11 @@ class Add(Resource):
                         format=PublicFormat.SubjectPublicKeyInfo)
 
         device = Device(public_key=data,
-                            name="foo bar",
+                            name="Space Balls",
                             uuid="49debd77-3d49-4d69-9756-044c3f5051e9")
         FlaskExtensions.db.session.add(device)
         try:
             FlaskExtensions.db.session.commit()
+            print('New Device Added', file=sys.stderr)
         except sqlalchemy.exc.IntegrityError:
             raise BadRequest("Failed to commit to database")
