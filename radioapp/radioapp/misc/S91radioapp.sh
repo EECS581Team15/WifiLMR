@@ -9,6 +9,7 @@ RADIOAPP_ARGS=""
 
 start() {
 	printf "Starting radioapp: "
+	modprobe pwm-bcm2835
 	start-stop-daemon -S -b -p /var/run/radioapp.pid --exec /usr/bin/python3 -- $RADIOAPP $RADIOAPP_ARGS
 	echo "OK"
 }
