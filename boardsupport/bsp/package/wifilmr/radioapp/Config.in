@@ -1,0 +1,8 @@
+
+config BR2_PACKAGE_RADIOAPP
+	bool "radioapp"
+	select BR2_PACKAGE_PYTHON_TKINTER
+	help
+	  WifiLMR radioapp.
+
+	  https://github.com/EECS581Team15/WifiLMR/

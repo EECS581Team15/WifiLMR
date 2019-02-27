@@ -35,10 +35,12 @@ class UIHome:
                                   command=lambda: master.switch_screen(master.display_ui_back_light))
         self.button_1.grid(row=7, column=0, sticky="nsew")
 
-        self.button_2 = tk.Button(self.bottom_frame, text="2", height=1, width=3, fg="white", bg="#3399ff")
+        self.button_2 = tk.Button(
+            self.bottom_frame, text="2", height=1, width=3, fg="white", bg="#3399ff")
         self.button_2.grid(row=7, column=1, sticky="nsew")
 
-        self.button_3 = tk.Button(self.bottom_frame, text="3", height=1, width=4, fg="white", bg="#3399ff")
+        self.button_3 = tk.Button(
+            self.bottom_frame, text="3", height=1, width=4, fg="white", bg="#3399ff")
         self.button_3.grid(row=7, column=2, sticky="nsew")
 
     def add_middle(self):
@@ -47,16 +49,20 @@ class UIHome:
         self.middle_frame = tk.Frame(self.my_frame, bg="#3399ff")
         self.middle_frame.pack(expand=1, fill="both")
 
-        self.label_4 = tk.Label(self.middle_frame, text="", fg="white", bg="#3399ff", font="Helvetica 9 bold")
+        self.label_4 = tk.Label(
+            self.middle_frame, text="", fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_4.grid(row=2, column=0, sticky="nsew")
 
-        self.label_5 = tk.Label(self.middle_frame, text=" Channel 0", fg="white", bg="#3399ff", font="Helvetica 9 bold")
+        self.label_5 = tk.Label(self.middle_frame, text=" Channel 0",
+                                fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_5.grid(row=4, column=0, sticky="nsew")
 
-        self.label_6 = tk.Label(self.middle_frame, text="          ", fg="white", bg="#3399ff", font="Helvetica 9 bold")
+        self.label_6 = tk.Label(self.middle_frame, text="          ",
+                                fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_6.grid(row=4, column=1, sticky="nsew")
 
-        self.label_7 = tk.Label(self.middle_frame, text="-120 dBm", fg="white", bg="#3399ff", font="Helvetica 9 bold")
+        self.label_7 = tk.Label(self.middle_frame, text="-120 dBm",
+                                fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_7.grid(row=4, column=2, sticky="nsew")
 
     def add_top(self):
@@ -69,7 +75,8 @@ class UIHome:
                                 font="Helvetica 9 bold")
         self.label_1.grid(row=0, column=0, sticky="nsew")
 
-        self.label_2 = tk.Label(self.top_frame, text="", height=1, width=6, fg="white", bg="#3399ff")
+        self.label_2 = tk.Label(self.top_frame, text="",
+                                height=1, width=6, fg="white", bg="#3399ff")
         self.label_2.grid(row=0, column=1, sticky="nsew")
 
         self.label_3 = tk.Label(self.top_frame, text="100%", height=1, width=7, fg="white", bg="#3399ff",
@@ -82,5 +89,5 @@ class UIHome:
         """Updates the clock time."""
 
         time_string = time.strftime('%H:%M:%S')
-        self.label_1.configure(text=time_string )
+        self.label_1.configure(text=time_string)
         self.label_1.after(200, func=self.update_clock)

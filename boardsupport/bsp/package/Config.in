@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_WiFiLMR_PATH/package/wifilmr/radioapp/Config.in"
