@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="static/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="static/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>WifiLMR Management Console</title>
@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 	<!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/material-kit.css?v=1.2.1" rel="stylesheet"/>
+    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="static/assets/css/material-kit.css?v=1.2.1" rel="stylesheet"/>
 </head>
 
 <body class="profile-page">
@@ -36,7 +36,7 @@
     </nav>
 
 
-	<div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/examples/city.jpg');"></div>
+	<div class="page-header header-filter" data-parallax="true" style="background-image: url('static/assets/img/examples/city.jpg');"></div>
 
 	<div class="main main-raised">
 		<div class="profile-content">
@@ -46,10 +46,10 @@
 	                <div class="col-xs-6 col-xs-offset-3">
         	           <div class="profile">
 	                        <div class="avatar">
-	                            <img src="../assets/img/examples/armaan.jpg" alt="User Image" class="img-circle img-responsive img-raised">
+	                            <img src="static/assets/img/examples/armaan.jpg" alt="User Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
-	                            <h3 class="title">Armaan Amirani</h3>
+	                            <h3 class="title">User</h3>
 								<h6>Administrator</h6>
 								<!-- <a href="#pablo" class="btn btn-just-icon btn-simple btn-dribbble"><i class="fa fa-dribbble"></i></a>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-twitter"><i class="fa fa-twitter"></i></a>
@@ -69,10 +69,11 @@
 							</tr>
 						</thead>
 						<tbody>
+						{% for i in range(10) %}
 							<tr>
-								<td class="text-center">1</td>
+								<td class="text-center">{{ i }}</td>
 								<td>Online</td>
-								<td>43</td>
+								<td>{{ range(1,101) | random }}</td>
 								<td class="td-actions">
 									<button type="button" rel="tooltip" class="btn btn-success">
 										<i class="material-icons">edit</i>
@@ -85,6 +86,7 @@
 									</button>
 								</td>
 							</tr>
+						{% endfor %}
 							<tr>
 								<td class="text-center">2</td>
 								<td>Online</td>
@@ -186,31 +188,31 @@
 
 </body>
 	<!--   Core JS Files   -->
-	<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
-	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="../assets/js/material.min.js"></script>
+	<script src="static/assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="static/assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="static/assets/js/material.min.js"></script>
 
 	<!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
-	<script src="../assets/js/moment.min.js"></script>
+	<script src="static/assets/js/moment.min.js"></script>
 
 	<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
-	<script src="../assets/js/nouislider.min.js" type="text/javascript"></script>
+	<script src="static/assets/js/nouislider.min.js" type="text/javascript"></script>
 
 	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
-	<script src="../assets/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+	<script src="static/assets/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
 
 	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
-	<script src="../assets/js/bootstrap-selectpicker.js" type="text/javascript"></script>
+	<script src="static/assets/js/bootstrap-selectpicker.js" type="text/javascript"></script>
 
 	<!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
-	<script src="../assets/js/bootstrap-tagsinput.js"></script>
+	<script src="static/assets/js/bootstrap-tagsinput.js"></script>
 
 	<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
-	<script src="../assets/js/jasny-bootstrap.min.js"></script>
+	<script src="static/assets/js/jasny-bootstrap.min.js"></script>
 
 	<!--    Plugin For Google Maps   -->
 	<script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
 	<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
-	<script src="../assets/js/material-kit.js?v=1.2.1" type="text/javascript"></script>
+	<script src="static/assets/js/material-kit.js?v=1.2.1" type="text/javascript"></script>
 </html>

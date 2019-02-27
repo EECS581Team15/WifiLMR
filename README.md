@@ -14,4 +14,5 @@ Getting Started
     * **radiomanager**: $REPO/env-man (`virtualenv env-man`)
     * **radioapp**: $REPO/env-app (`virtualenv env-app`)
 6. Enter the environment for the project you're working on (`source env-$PROJ/bin/activate`)
-7. Restore the project dependencies (`pip install -r requirements.txt` in the corresponding folder)
+7. Install libdbus (`sudo apt install libdbus-glib-1-dev`)
+8. Restore the project dependencies (`pip install -r requirements.txt` in the corresponding folder)

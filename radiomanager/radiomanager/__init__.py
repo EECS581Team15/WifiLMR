@@ -6,11 +6,10 @@ WifiLMR's backend server. Handles authentication, fleet management, and call
 routing.
 """
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from . import mdns
-
 
 class FlaskExtensions:
     """
@@ -34,7 +33,7 @@ class TESTING_CONFIG:
     SQLALCHEMY_DATABASE_URI = "sqlite://"
 
 
-def create_app(config_obj=PRODUCTION_CONFIG):
+def create_app(config_obj=TESTING_CONFIG):
     from .api import setup_routing
     app = Flask(__name__)
     app.config.from_object(config_obj)
@@ -42,6 +41,10 @@ def create_app(config_obj=PRODUCTION_CONFIG):
     with app.app_context():
         FlaskExtensions.api.init_app(app)
         FlaskExtensions.db.init_app(app)
+        FlaskExtensions.db.create_all()
+    @app.route('/')
+    def homepage():
+        return render_template('console.html')
     return app
 
 

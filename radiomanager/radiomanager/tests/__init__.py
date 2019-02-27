@@ -1,5 +1,6 @@
 from flask_testing import TestCase
 from .. import create_app, TESTING_CONFIG, FlaskExtensions
+from ..models.device import Device
 
 
 class AppTestCase(TestCase):
