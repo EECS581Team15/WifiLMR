@@ -1,4 +1,5 @@
 from .home import UIHome
+from .ui_backlight import UIBackLight
 import tkinter as tk
 
 
@@ -19,6 +20,12 @@ class UIManager:
         """Displays the Home screen."""
 
         self.current_screen = UIHome(self.window, self)
+        self.current_screen.pack_screen()
+
+    def display_ui_back_light(self):
+        """Displays the UI BackLight screen."""
+
+        self.current_screen = UIBackLight(self.window, self.current_slider_number, self)
         self.current_screen.pack_screen()
 
     def initialize_window(self):
