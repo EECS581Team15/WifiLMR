@@ -9,7 +9,7 @@ interface.
 import time
 import dbus
 import logging
-import dbus_holder
+from . import dbus_holder
 
 
 class WpaSupplicant:

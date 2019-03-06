@@ -1,16 +1,18 @@
 import tkinter as tk
 import time
+from . import resources
 
 
 class UIHome:
     """Creates UI Home Screen."""
 
-    def __init__(self, window, master):
+    def __init__(self, window, master, hal):
         """Creates a frame, and customizes and adds labels for UI Home Screen."""
 
         window.title("Home")
+        self.hal = hal
         self.my_frame = tk.Frame(window)
-
+        self.icons = resources.Resources()
         self.add_top()
         self.add_middle()
         self.add_buttons(master)
@@ -61,29 +63,26 @@ class UIHome:
                                 fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_6.grid(row=4, column=1, sticky="nsew")
 
-        self.label_7 = tk.Label(self.middle_frame, text="-120 dBm",
-                                fg="white", bg="#3399ff", font="Helvetica 9 bold")
-        self.label_7.grid(row=4, column=2, sticky="nsew")
-
     def add_top(self):
         """Customizes and adds labels at the top frame."""
 
-        self.top_frame = tk.Frame(self.my_frame, bg="yellow")
+        self.top_frame = tk.Frame(self.my_frame, bg="#3399ff")
         self.top_frame.pack(side="top", fill="x")
 
-        self.label_1 = tk.Label(self.top_frame, text="12:00:00", height=1, width=8, fg="white", bg="#3399ff",
+        self.label_1 = tk.Label(self.top_frame, text="12:00:00", height=2, width=8, fg="white", bg="#3399ff",
                                 font="Helvetica 9 bold")
         self.label_1.grid(row=0, column=0, sticky="nsew")
 
         self.label_2 = tk.Label(self.top_frame, text="",
-                                height=1, width=6, fg="white", bg="#3399ff")
+                                height=2, width=6, fg="white", bg="#3399ff")
         self.label_2.grid(row=0, column=1, sticky="nsew")
 
-        self.label_3 = tk.Label(self.top_frame, text="100%", height=1, width=7, fg="white", bg="#3399ff",
-                                font="Helvetica 9 bold")
-        self.label_3.grid(row=0, column=2, sticky="nsew")
+        self.wifi_icon = tk.Label(self.top_frame, height=31,
+                                  width=24, image=self.icons.WIFI_NONE, bg="#3399ff")
+        self.wifi_icon.place(x=136, y=0)
 
         self.update_clock()
+        self.update_wifi()
 
     def update_clock(self):
         """Updates the clock time."""
@@ -91,3 +90,22 @@ class UIHome:
         time_string = time.strftime('%H:%M:%S')
         self.label_1.configure(text=time_string)
         self.label_1.after(200, func=self.update_clock)
+
+    def update_wifi(self):
+        """
+        Updates the wifi icon
+        """
+        info = self.hal.wifi.signal_poll()
+        image = self.icons.WIFI_NONE
+        if info is not None and "avg-rssi" in info:
+            quality = 2 * (info["avg-rssi"] + 100)
+            if quality >= 75:
+                image = self.icons.WIFI_4
+            elif quality >= 50:
+                image = self.icons.WIFI_3
+            elif quality >= 25:
+                image = self.icons.WIFI_2
+            else:
+                image = self.icons.WIFI_1
+        self.wifi_icon.config(image=image)
+        self.wifi_icon.after(500, func=self.update_wifi)
