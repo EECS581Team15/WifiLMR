@@ -8,12 +8,17 @@ class UIHome:
     def __init__(self, window, master):
         """Creates a frame, and customizes and adds labels for UI Home Screen."""
 
+        self.window = window
         window.title("Home")
+        window.bind("<Left>", self.button_1_action)
+        window.bind("<space>", self.button_2_action)
+        window.bind("<Right>", self.button_3_action)
         self.my_frame = tk.Frame(window)
+        self.master = master
 
         self.add_top()
         self.add_middle()
-        self.add_buttons(master)
+        self.add_buttons()
 
     def pack_screen(self):
         """Puts the screen on the main window."""
@@ -23,16 +28,19 @@ class UIHome:
     def destroy_screen(self):
         """Destroys the screen from the main window."""
 
+        self.window.unbind("<Left>")
+        self.window.unbind("<space>")
+        self.window.unbind("<Right>")
         self.my_frame.destroy()
 
-    def add_buttons(self, master):
+    def add_buttons(self):
         """Adds buttons at the bottom frame."""
 
         self.bottom_frame = tk.Frame(self.my_frame, bg="yellow")
         self.bottom_frame.pack(side="bottom", fill="x")
 
-        self.button_1 = tk.Button(self.bottom_frame, text="1", bg="#3399ff", fg="white", height=1, width=3, 
-                                  command=lambda: master.switch_screen(master.display_ui_back_light))
+        self.button_1 = tk.Button(self.bottom_frame, text="1", bg="#3399ff", fg="white", height=1, width=3,
+                                  command=self.button_1_action)
         self.button_1.grid(row=7, column=0, sticky="nsew")
 
         self.button_2 = tk.Button(
@@ -91,3 +99,12 @@ class UIHome:
         time_string = time.strftime('%H:%M:%S')
         self.label_1.configure(text=time_string)
         self.label_1.after(200, func=self.update_clock)
+
+    def button_1_action(self, *args):
+        self.master.switch_screen(self.master.display_ui_back_light)
+
+    def button_2_action(self, *args):
+        print("Button 2")
+
+    def button_3_action(self, *args):
+        print("Button 3")
