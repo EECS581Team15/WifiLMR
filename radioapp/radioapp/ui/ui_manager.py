@@ -26,7 +26,8 @@ class UIManager:
     def display_ui_back_light(self):
         """Displays the UI BackLight screen."""
 
-        self.current_screen = UIBackLight(self.window, self.current_slider_number, self)
+        self.current_screen = UIBackLight(
+            self.window, self.current_slider_number, self, self.hal)
         self.current_screen.pack_screen()
 
     def initialize_window(self):
