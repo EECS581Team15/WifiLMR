@@ -1,5 +1,6 @@
 import tkinter as tk
 import time
+from .images import *
 
 
 class UIHome:
