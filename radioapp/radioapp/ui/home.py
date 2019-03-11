@@ -100,9 +100,7 @@ class UIHome:
         self.label_1.configure(text=time_string)
         self.label_1.after(200, func=self.update_clock)
 
-
-<< << << < HEAD
-   def update_wifi(self):
+    def update_wifi(self):
         """
         Updates the wifi icon
         """
@@ -120,8 +118,8 @@ class UIHome:
                 image = self.icons.WIFI_1
         self.wifi_icon.config(image=image)
         self.wifi_icon.after(500, func=self.update_wifi)
-== == == =
-   def button_1_action(self, *args):
+
+    def button_1_action(self, *args):
         self.master.switch_screen(self.master.display_ui_back_light)
 
     def button_2_action(self, *args):
@@ -129,4 +127,3 @@ class UIHome:
 
     def button_3_action(self, *args):
         print("Button 3")
->>>>>> > master
