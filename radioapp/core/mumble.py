@@ -17,14 +17,14 @@ class MumbleAdapter():
     def __init__(self):
         self.mumble = None
 
-    def initialize(self, host, user, port=64738, password='', certfile=None, keyfile=None, reconnect=True, tokens=[], debug=False):
+    def connect(self, host, user, port=64738, password='', certfile=None, keyfile=None, reconnect=True, tokens=[], debug=False):
         """
         Creates/initializes the Mumble object
         """
         if not self.mumble:
             self.mumble = Mumble(host, user, port, password, certfile, keyfile, reconnect, tokens, debug)
 
-    def start(self, callback):
+    def start(self):
         """
         Start and configure the mumble client
         """
@@ -32,9 +32,8 @@ class MumbleAdapter():
             return
         self.mumble.set_application_string("Radio?")
         self.mumble.start()
-        callback()
     
-    def connect(self, callback):
+    def on_connect(self, callback):
         self.set_mumble_callback(PYMUMBLE_CLBK_CONNECTED, callback)
 
     def set_mumble_callback(self, callbackConstant, callback):
