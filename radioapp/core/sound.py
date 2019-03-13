@@ -20,6 +20,8 @@ class SoundManager():
         self.should_play_sound = True
         self.play_sound(True)
 
+        self.should_record = True
+
     def sound_received(self, user_queue, raw_sound):
         """ 
         Callback used when sound is received. 
@@ -55,10 +57,37 @@ class SoundManager():
                                     channels=1,
                                     rate=48000,
                                     output=True,
+                                    input=False,
                                     frames_per_buffer=self.CHUNK)
 
         while self.should_play_sound:
             while len(self.sound_in_queue) > 0:
                 stream.write(self.sound_in_queue.popleft())
+
+    
+    def set_recording(self, should_record):
+        self.should_record = should_record
+
+
+    def start_recording(self):
+        import pyaudio
+
+
+        def recording_received(in_data, frame_count, time_info, status):
+            if self.should_record:
+                print(in_data[:10])
+            return (None, pyaudio.paContinue)
+
+
+        pa = pyaudio.PyAudio()
+        stream = pa.open(format=pyaudio.paInt16,
+                                    channels=1,
+                                    rate=48000,
+                                    output=False,
+                                    input=True,
+                                    stream_callback=recording_received,
+                                    frames_per_buffer=self.CHUNK)
+
+
 
     
