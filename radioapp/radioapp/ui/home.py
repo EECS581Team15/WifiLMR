@@ -106,8 +106,8 @@ class UIHome:
         """
         info = self.hal.wifi.signal_poll()
         image = self.icons.WIFI_NONE
-        if info is not None and "avg-rssi" in info:
-            quality = 2 * (info["avg-rssi"] + 100)
+        if info is not None and "rssi" in info:
+            quality = 2 * (info["rssi"] + 100)
             if quality >= 75:
                 image = self.icons.WIFI_4
             elif quality >= 50:
