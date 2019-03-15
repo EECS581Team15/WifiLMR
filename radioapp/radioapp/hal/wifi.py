@@ -32,7 +32,8 @@ class WpaSupplicant:
             self.interface = self._get_interface(self.INTERFACE)
         if self.interface is not None:
             try:
-                return self.interface.SignalPoll()
+                if self._get_state() == "completed":
+                    return self.interface.SignalPoll()
             except dbus.exceptions.DBusException:
                 # Something bad happened (interface went away, not connected to wifi, etc.)
                 self.interface = None
@@ -49,6 +50,12 @@ class WpaSupplicant:
                 self.logger.debug("Found interface @ %s", interfacePath)
                 return dbus.Interface(obj, self.WPA_SUPPLICANT_INTERFACE_INTERFACE)
         self.logger.info("Failed to find interface")
+
+    def _get_state(self):
+        if self.interface is not None:
+            props = dbus.Interface(
+                self.interface.proxy_object, "org.freedesktop.DBus.Properties")
+            return props.Get(self.WPA_SUPPLICANT_INTERFACE_INTERFACE, "State")
 
 
 if __name__ == "__main__":
