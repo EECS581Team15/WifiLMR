@@ -6,10 +6,15 @@ Implements an interface to wpa_supplicant over DBus for control of the WiFi
 interface.
 """
 
+import os
 import time
 import dbus
 import logging
 from . import dbus_holder
+
+
+USR1 = 10
+USR2 = 12
 
 
 class WpaSupplicant:
@@ -22,6 +27,7 @@ class WpaSupplicant:
         self.bus = bus
         self.logger = logging.getLogger(__name__)
         self.interface = None
+        self.last_state = None
 
     def signal_poll(self):
         """
@@ -32,8 +38,15 @@ class WpaSupplicant:
             self.interface = self._get_interface(self.INTERFACE)
         if self.interface is not None:
             try:
-                if self._get_state() == "completed":
+                old_state = self.last_state
+                new_state = self._get_state()
+                self.last_state = new_state
+                if new_state == "completed":
+                    if old_state != "completed":
+                        self._alert_udhcpc(USR1)  # Just became connected
                     return self.interface.SignalPoll()
+                elif old_state == "completed":
+                    self._alert_udhcpc(USR2)  # Just became disconnected
             except dbus.exceptions.DBusException:
                 # Something bad happened (interface went away, not connected to wifi, etc.)
                 self.interface = None
@@ -56,6 +69,9 @@ class WpaSupplicant:
             props = dbus.Interface(
                 self.interface.proxy_object, "org.freedesktop.DBus.Properties")
             return props.Get(self.WPA_SUPPLICANT_INTERFACE_INTERFACE, "State")
+
+    def _alert_udhcpc(self, signal):
+        os.system("killall -%s udhcpc" % (signal,))
 
 
 if __name__ == "__main__":
