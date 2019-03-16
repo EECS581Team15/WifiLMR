@@ -4,10 +4,11 @@ import tkinter as tk
 class UIBackLight:
     """Creates UI BackLight Screen."""
 
-    def __init__(self, window, slider_number, master):
+    def __init__(self, window, slider_number, master, hal):
         """Creates a frame, and adds slider and labels for UI BackLight."""
 
         self.window_copy = window
+        self.hal = hal
         window.title("BackLight Setting")
         self.my_frame = tk.Frame(window, bg="#3399ff")
 
@@ -69,7 +70,7 @@ class UIBackLight:
         self.top_label.grid(row=2)
 
         self.slider = tk.Scale(self.my_frame, from_=0, to=100, fg="white", bg="#3399ff", state="disabled",
-                               sliderlength=20, orient=tk.HORIZONTAL, command=self.print_slider_value)
+                               sliderlength=20, orient=tk.HORIZONTAL, command=lambda value: self.hal.backlight.set_level(int(value)))
         self.slider.grid(row=3)
 
     def add_label(self):
@@ -78,11 +79,6 @@ class UIBackLight:
         self.text_label = tk.Label(self.my_frame, text="Adjust Brightness", fg="white", bg="#3399ff",
                                    font="Helvetica 10 bold")
         self.text_label.grid(row=1)
-
-    def print_slider_value(self, slider_value):
-        """Prints slider value."""
-
-        print(slider_value)
 
     def right_key(self, event):
         """Binds Up key to change the slider value."""

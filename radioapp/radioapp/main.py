@@ -8,7 +8,6 @@ from hal import backlight
 if __name__ == "__main__":
     hal = HAL()
     # Remove the backlight hardcoding once we've got proper UI support/state saving
-    bklight = backlight.Backlight()
-    bklight.set_level(100)
+    hal.backlight.set_level(100)
     manager = ui_manager.UIManager(hal)
     manager.main_loop()
