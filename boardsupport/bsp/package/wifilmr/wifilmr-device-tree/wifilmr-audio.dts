@@ -1,0 +1,77 @@
+// WifiLMR audio hardware
+// MAX98357A DAC and SPH0645LM4H digital microphone
+// Host is Raspberry Pi Zero W
+
+// Derived from mbed-dac-overlay.dts
+
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target = <&i2s>;
+		__overlay__ {
+			status = "okay";
+
+			#sound-dai-cells = <0>;
+		};
+	};
+
+	fragment@1 {
+		target-path = "/";
+		__overlay__ {
+			codec_out: spdif-transmitter {
+				#address-cells = <0>;
+				#size-cells = <0>;
+				#sound-dai-cells = <0>;
+				compatible = "linux,spdif-dit";
+				status = "okay";
+			};
+			codec_in: spdif-receiver {
+				#address-cells = <0>;
+				#size-cells = <0>;
+				#sound-dai-cells = <0>;
+				compatible = "linux,spdif-dir";
+				status = "okay";
+			};
+		};
+	};
+	fragment@2 {
+		target = <&sound>;
+		__overlay__ {
+			compatible = "simple-audio-card";
+			i2s-controller = <&i2s>;
+			status = "okay";
+			simple-audio-card,name = "WifiLMR Audio";
+			capture_link: simple-audio-card,dai-link@0 {
+				reg = <0>;
+				format = "i2s";
+
+				cpu {
+					sound-dai = <&i2s>;
+				};
+
+				codec {
+					sound-dai = <&codec_in>;
+					system-clock-frequency = <3072000>;
+				};
+			};
+			playback_link: simple-audio-card,dai-link@1 {
+				reg = <1>;
+				format = "i2s";
+
+				cpu {
+					sound-dai = <&i2s>;
+				};
+
+				codec {
+					sound-dai = <&codec_out>;
+					system-clock-frequency = <3072000>;
+				};
+			};
+			
+		};
+	};
+};
