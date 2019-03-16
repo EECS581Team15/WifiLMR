@@ -18,3 +18,10 @@ communicating with wpa_supplicant over DBus. This will be used to connect to
 the configured network, provision the network connection via WiFi Protected
 Setup, and retrieve current connection status information.
 """
+import dbus
+from . import wifi
+
+
+class HAL:
+    def __init__(self):
+        self.wifi = wifi.WpaSupplicant(dbus.SystemBus())
