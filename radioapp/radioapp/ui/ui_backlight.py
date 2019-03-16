@@ -15,6 +15,7 @@ class UIBackLight:
         # Binds key presses to change slider value.
         window.bind("<Right>", self.right_key)
         window.bind("<Left>", self.left_key)
+        window.bind("<space>", lambda x: self.save_and_switch(master))
 
         # Adds label to the window.
         self.add_label()
@@ -37,6 +38,7 @@ class UIBackLight:
 
         self.window_copy.unbind("<Right>")
         self.window_copy.unbind("<Left>")
+        self.window_copy.unbind("<space>")
         self.my_frame.destroy()
 
     def add_saver(self, master):
