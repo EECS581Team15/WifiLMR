@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 from . import resources
+from .images import *
 
 
 class UIHome:
@@ -44,14 +45,20 @@ class UIHome:
 
         self.button_1 = tk.Button(self.bottom_frame, text="1", bg="#3399ff", fg="white", height=1, width=3,
                                   command=self.button_1_action)
+        self.icon_1 = tk.PhotoImage(data=setting)
+        self.button_1.config(image=self.icon_1, width="46", height="25")
         self.button_1.grid(row=7, column=0, sticky="nsew")
 
         self.button_2 = tk.Button(
             self.bottom_frame, text="2", height=1, width=3, fg="white", bg="#3399ff")
+        self.icon_2 = tk.PhotoImage(data=radio)
+        self.button_2.config(image=self.icon_2, width="48", height="25")
         self.button_2.grid(row=7, column=1, sticky="nsew")
 
         self.button_3 = tk.Button(
             self.bottom_frame, text="3", height=1, width=4, fg="white", bg="#3399ff")
+        self.icon_3 = tk.PhotoImage(data=message)
+        self.button_3.config(image=self.icon_3, width="48", height="25")
         self.button_3.grid(row=7, column=2, sticky="nsew")
 
     def add_middle(self):
