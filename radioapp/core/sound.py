@@ -21,6 +21,10 @@ class SoundManager():
         self.play_sound(True)
 
         self.should_record = True
+        self.record_proc = Thread(target=self.start_recording)
+
+        self.sound_play_proc.start()
+        self.record_proc.start()
 
     def sound_received(self, user_queue, raw_sound):
         """ 
@@ -72,12 +76,10 @@ class SoundManager():
     def start_recording(self):
         import pyaudio
 
-
         def recording_received(in_data, frame_count, time_info, status):
             if self.should_record:
                 print(in_data[:10])
             return (None, pyaudio.paContinue)
-
 
         pa = pyaudio.PyAudio()
         stream = pa.open(format=pyaudio.paInt16,
@@ -87,6 +89,8 @@ class SoundManager():
                                     input=True,
                                     stream_callback=recording_received,
                                     frames_per_buffer=self.CHUNK)
+
+        stream.start_stream()
 
 
 
