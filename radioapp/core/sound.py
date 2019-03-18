@@ -18,7 +18,7 @@ class SoundManager():
         self.mumble.set_mumble_callback(PYMUMBLE_CLBK_SOUNDRECEIVED, self.sound_received)
 
         self.sound_play_proc = Thread(target=self.play_raw_audio_proc)
-        self.should_play_sound = True
+        self.should_play_sound = False
 
         self.record_proc = Thread(target=self.start_recording)
         self.should_record = True
@@ -67,13 +67,15 @@ class SoundManager():
     def set_recording(self, should_record):
         self.should_record = should_record
 
-
     def start_recording(self):
         import pyaudio
 
+        self.mumble.upload_size(0.02)
+
         def recording_received(in_data, frame_count, time_info, status):
             if self.should_record:
-                print(len(in_data))
+                self.mumble.send_sound(in_data)
+                #print(len(in_data))
             return (None, pyaudio.paContinue)
 
         pa = pyaudio.PyAudio()
