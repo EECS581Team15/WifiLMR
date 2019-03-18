@@ -12,19 +12,22 @@ class SoundManager():
         """
         self.mumble = mumble
         self.CHUNK = 1920
+        self.STEREO_MIC = True
 
         self.sound_in_queue = deque()
         self.mumble.set_mumble_callback(PYMUMBLE_CLBK_SOUNDRECEIVED, self.sound_received)
 
         self.sound_play_proc = Thread(target=self.play_raw_audio_proc)
         self.should_play_sound = True
-        self.play_sound(True)
 
-        self.should_record = True
         self.record_proc = Thread(target=self.start_recording)
+        self.should_record = True
 
         self.sound_play_proc.start()
         self.record_proc.start()
+
+    def set_playing(self, should_play_sound):
+        self.should_play_sound = should_play_sound
 
     def sound_received(self, user_queue, raw_sound):
         """ 
@@ -33,14 +36,6 @@ class SoundManager():
         raw_sound is the sound object being placed in queue.
         """
         self.play_raw_audio(raw_sound.pcm)
-
-    def play_sound(self, should_play):
-        """ 
-        If sound received should be played based on paramater should_play
-        """
-        self.should_play_sound = should_play
-        if self.should_play_sound:
-            self.sound_play_proc.start()
 
     def play_raw_audio(self, sound):
         """ 
@@ -78,17 +73,19 @@ class SoundManager():
 
         def recording_received(in_data, frame_count, time_info, status):
             if self.should_record:
-                print(in_data[:10])
+                print(len(in_data))
             return (None, pyaudio.paContinue)
 
         pa = pyaudio.PyAudio()
+        xChunk = 2 if self.STEREO_MIC else 1
+        chunk = self.CHUNK // xChunk
         stream = pa.open(format=pyaudio.paInt16,
                                     channels=1,
                                     rate=48000,
                                     output=False,
                                     input=True,
                                     stream_callback=recording_received,
-                                    frames_per_buffer=self.CHUNK)
+                                    frames_per_buffer=chunk)
 
         stream.start_stream()
 
