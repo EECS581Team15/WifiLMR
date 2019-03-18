@@ -45,6 +45,9 @@
 			i2s-controller = <&i2s>;
 			status = "okay";
 			simple-audio-card,name = "WifiLMR Audio";
+			simple-audio-card,bitclock-master = <&r_codec>;
+			simple-audio-card,frame-master = <&r_codec>;
+			simple-audio-card,convert-rate = <48000>;
 			capture_link: simple-audio-card,dai-link@0 {
 				reg = <0>;
 				format = "i2s";
@@ -53,7 +56,7 @@
 					sound-dai = <&i2s>;
 				};
 
-				codec {
+				r_codec: codec {
 					sound-dai = <&codec_in>;
 					system-clock-frequency = <3072000>;
 				};
