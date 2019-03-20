@@ -62,31 +62,66 @@
 					<table class="table">
 						<thead>
 							<tr>
+								<th class="text-center">Name</th>
+								<th>Internal ID</th>
+								<th>Public Key</th>
+								<th>Unique User ID</th>
+								<th>Key Actions</th>
+								<!--
 								<th class="text-center">Radio ID</th>
 								<th>Status</th>
 								<th>Channel</th>
 								<th>Actions</th>
+								-->
 							</tr>
 						</thead>
 						<tbody>
-						{% for i in range(10) %}
+						{% if deviceList is not defined %}
 							<tr>
-								<td class="text-center">{{ deviceList }}</td>
-								<td>Online</td>
-								<td>{{ range(1,101) | random }}</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
+								<td class="text-center">No Devices Connected</td>
 							</tr>
-						{% endfor %}
+						{% else %}
+							{% for device in deviceList %}
+								<tr>
+									<td class="text-center">{{ device.name }}</td>
+									<td>{{device.internal_id}}</td>
+									<td>{{device.public_key}}</td>
+									<td>{{device.uuid}}</td>
+									<td class="td-actions">
+									{% if device.key_revoked %}
+
+										<button type="button" rel="tooltip" class="btn btn-info">
+											<i class="material-icons">check</i>
+										</button>
+									{% else %}
+										<form action="/action_page.php" method="post" id="form2">
+
+										</form>
+										<button type="button" form="form2" rel="tooltip" class="btn btn-danger">
+											<i class="material-icons">close</i>
+										</button>
+									{% endif %}
+									</td>
+
+									<!--
+									<td>Online</td>
+									<td>{{ range(1,101) | random }}</td>
+									<td class="td-actions">
+										<button type="button" rel="tooltip" class="btn btn-success">
+											<i class="material-icons">edit</i>
+										</button>
+										<button type="button" rel="tooltip" class="btn btn-info">
+											<i class="material-icons">check</i>
+										</button>
+										<button type="button" rel="tooltip" class="btn btn-danger">
+											<i class="material-icons">close</i>
+										</button>
+									</td>
+									-->
+								</tr>
+							{% endfor %}
+						{% endif %}
+							<!--
 							<tr>
 								<td class="text-center">2</td>
 								<td>Online</td>
@@ -167,6 +202,7 @@
 									</button>
 								</td>
 							</tr>
+						-->
 						</tbody>
 					</table>
 					</div>

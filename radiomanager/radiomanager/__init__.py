@@ -6,7 +6,7 @@ WifiLMR's backend server. Handles authentication, fleet management, and call
 routing.
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from . import mdns
 from . import FlaskExtensions
 from .models.device import Device
@@ -31,9 +31,10 @@ def create_app(config_obj=TESTING_CONFIG):
         FlaskExtensions.api.init_app(app)
         FlaskExtensions.db.init_app(app)
         FlaskExtensions.db.create_all()
-    @app.route('/')
+    @app.route('/', methods=['GET','POST'])
     def homepage():
-        print(Device.query.first().name, file=sys.stderr)
+        """print(Device.query.first().name, file=sys.stderr)"""
+        keyRevoked = request.form.post("form2","")
         return render_template('console.html', deviceList=Device.query.all())
     return app
 

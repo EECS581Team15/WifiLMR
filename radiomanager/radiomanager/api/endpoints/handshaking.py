@@ -94,7 +94,7 @@ class Add(Resource):
 
         device = Device(public_key=data,
                             name="Space Balls",
-                            uuid="49debd77-3d49-4d69-9756-044c3f5051e9")
+                            uuid=str(uuid.uuid4()))
         FlaskExtensions.db.session.add(device)
         try:
             FlaskExtensions.db.session.commit()
