@@ -11,6 +11,7 @@ from . import mdns
 from . import FlaskExtensions
 from .models.device import Device
 import sys
+import dbus
 
 class PRODUCTION_CONFIG:
     TESTING = False
@@ -34,8 +35,27 @@ def create_app(config_obj=TESTING_CONFIG):
     @app.route('/', methods=['GET','POST'])
     def homepage():
         """print(Device.query.first().name, file=sys.stderr)"""
-        keyRevoked = request.form.post("form2","")
-        return render_template('console.html', deviceList=Device.query.all())
+        """keyRevoked = request.form.post("form2","")"""
+
+        MUMBLE_SERVICE = "net.sourceforge.mumble.murmur"
+        bus = dbus.SystemBus()
+        server = bus.get_object(MUMBLE_SERVICE, "/1")
+        playerList = server.getPlayers()
+        devices = Device.query.all()
+
+        outputList = []
+
+        for device in devices:
+            added = False
+            for player in playerList:
+                if device.uuid == player.name:
+                    outputList.append((device, player))
+                    added = True
+                    break
+            if not added:
+                outputList.append((device, None))
+
+        return render_template('console.html', deviceList=outputList)
     return app
 
 
