@@ -59,8 +59,8 @@ class SoundManager():
                                     input=False,
                                     frames_per_buffer=self.CHUNK)
 
-        while self.should_play_sound:
-            while len(self.sound_in_queue) > 0:
+        while len(self.sound_in_queue) > 0:
+            if self.should_play_sound:
                 stream.write(self.sound_in_queue.popleft())
 
     
