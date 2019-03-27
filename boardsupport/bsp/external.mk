@@ -1,1 +1,1 @@
-include $(sort $(wildcard $(BR2_EXTERNAL_PATH)/package/*/*.mk))
+include $(sort $(wildcard $(BR2_EXTERNAL_WiFiLMR_PATH)/package/wifilmr/*/*.mk))
