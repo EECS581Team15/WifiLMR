@@ -21,12 +21,15 @@ class SoundManager():
         self.should_play_sound = False
 
         self.record_proc = Thread(target=self.start_recording)
-        self.should_record = True
+        self.should_record = False
 
         self.sound_play_proc.start()
         self.record_proc.start()
 
     def set_playing(self, should_play_sound):
+        """ 
+            Set variable responsible for speaker output control
+        """
         self.should_play_sound = should_play_sound
 
     def sound_received(self, user_queue, raw_sound):
@@ -65,9 +68,15 @@ class SoundManager():
 
     
     def set_recording(self, should_record):
+        """ 
+        Sets variable responsible for controlling microphone input
+        """
         self.should_record = should_record
 
     def start_recording(self):
+        """ 
+        Process for recording audio and sending it to mumble server
+        """
         import pyaudio
 
         self.mumble.upload_size(0.02)
