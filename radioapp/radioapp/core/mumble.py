@@ -58,3 +58,9 @@ class MumbleAdapter():
 
     def get_channels(self):
         return self.mumble.channels
+
+    def send_sound(self, sound):
+        self.mumble.sound_output.add_sound(sound)
+
+    def upload_size(self, size):
+        self.mumble.sound_output.set_audio_per_packet(size)
