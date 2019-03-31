@@ -11,10 +11,10 @@ class SoundEffects():
         """
         self.CHUNK = 1024
         self.should_play = True
+        self.audio = pyaudio.PyAudio()
 
     def play_wave_file(self, file_to_play):
         """ Plays a wave file """
-        self.audio = pyaudio.PyAudio()
         wave_file = wave.open(file_to_play, 'rb')
         stream = self.audio.open(format=self.audio.get_format_from_width(wave_file.getsampwidth()),
                                     channels=wave_file.getnchannels(),
@@ -29,7 +29,6 @@ class SoundEffects():
 
         stream.stop_stream()
         stream.close()
-        self.audio.terminate()
 
     def stop(self):
         """ Stops the current playing audio """
