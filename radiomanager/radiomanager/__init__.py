@@ -34,26 +34,27 @@ def create_app(config_obj=TESTING_CONFIG):
         FlaskExtensions.db.create_all()
     @app.route('/', methods=['GET','POST'])
     def homepage():
-        """print(Device.query.first().name, file=sys.stderr)"""
-        """keyRevoked = request.form.post("form2","")"""
 
         MUMBLE_SERVICE = "net.sourceforge.mumble.murmur"
         bus = dbus.SystemBus()
         server = bus.get_object(MUMBLE_SERVICE, "/1")
-        playerList = server.getPlayers()
-        devices = Device.query.all()
+        # playerList = server.getPlayers()
+        murmur = dbus.Interface(server, 'net.sourceforge.mumble.Murmur')
+        intro = murmur.getPlayers(dbus_interface='net.sourceforge.mumble.Murmur')
+        # devices = Device.query.all()
+        print(intro, file=sys.stderr)
 
         outputList = []
 
-        for device in devices:
-            added = False
-            for player in playerList:
-                if device.uuid == player.name:
-                    outputList.append((device, player))
-                    added = True
-                    break
-            if not added:
-                outputList.append((device, None))
+        # for device in devices:
+        #     added = False
+        #     for player in playerList:
+        #         if device.uuid == player.name:
+        #             outputList.append((device, player))
+        #             added = True
+        #             break
+        #     if not added:
+        #         outputList.append((device, None))
 
         return render_template('console.html', deviceList=outputList)
     return app
