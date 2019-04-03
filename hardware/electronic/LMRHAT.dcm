@@ -1,0 +1,29 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP +Vhandoff
+D Main unregulated power supply
+$ENDCMP
+#
+$CMP +Vopt
+D Main unregulated power supply
+$ENDCMP
+#
+$CMP MAX98357
+D I2S Audio Amplifier
+K mono audio amplifier i2s
+F https://datasheets.maximintegrated.com/en/ds/MAX98357A-MAX98357B.pdf
+$ENDCMP
+#
+$CMP S-8200A
+D Seiko Instruments battery protection IC
+K battery protection
+F https://www.mouser.com/datasheet/2/360/S8200A_E-1365901.pdf
+$ENDCMP
+#
+$CMP TSM850N06CX
+D N-Channel Power MOSFET
+K N-Channel Power MOSFET
+F https://www.taiwansemi.com/products/datasheet/TSM850N06CX_B1607.pdf
+$ENDCMP
+#
+#End Doc Library

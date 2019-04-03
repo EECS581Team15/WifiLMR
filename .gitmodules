@@ -1,0 +1,3 @@
+[submodule "Buildroot"]
+	path = boardsupport/buildroot
+	url = git@github.com:EECS581Team15/buildroot.git
