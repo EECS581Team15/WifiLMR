@@ -40,11 +40,18 @@ def create_app(config_obj=TESTING_CONFIG):
         server = bus.get_object(MUMBLE_SERVICE, "/1")
         # playerList = server.getPlayers()
         murmur = dbus.Interface(server, 'net.sourceforge.mumble.Murmur')
-        intro = murmur.getPlayers(dbus_interface='net.sourceforge.mumble.Murmur')
+        devices = murmur.getPlayers(dbus_interface='net.sourceforge.mumble.Murmur')
         # devices = Device.query.all()
-        print(intro, file=sys.stderr)
-
+        print(devices, file=sys.stderr)
         outputList = []
+        for d in devices:
+            device = { 
+                'name': d[8],
+                'radioID': d[7],
+                'channel': d[6],
+                'onlineseconds': d[9]
+            }
+            outputList.append(device)
 
         # for device in devices:
         #     added = False

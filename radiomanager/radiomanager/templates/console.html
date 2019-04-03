@@ -64,10 +64,10 @@
 							<tr>
 								<th class="text-center">Name</th>
 								<th>Online/Offline<th>
-								<th>Internal ID</th>
-								<th>Public Key</th>
-								<th>Unique User ID</th>
-								<th>Key Actions</th>
+								<th>Radio ID</th>
+								<th>Channel</th>
+								<th>Seconds Online</th>
+								<!-- <th>Key Actions</th> -->
 								<!--
 								<th class="text-center">Radio ID</th>
 								<th>Status</th>
@@ -84,19 +84,19 @@
 						{% else %}
 							{% for device in deviceList %}
 								<tr>
-									<td class="text-center">{{ device[0].name }}</td>
+									<td class="text-center">{{ device.name }}</td>
 									<td>
-									{% if device[1] == None %}
-									Offline
-									{% else %}
+									<!-- {% if device == None %} -->
+									<!-- Offline -->
+									<!-- {% else %} -->
 									Online
-									{% endif %}
+									<!-- {% endif %} -->
 									<td>
-									<td>{{device[0].internal_id}}</td>
-									<td>{{device[0].public_key}}</td>
-									<td>{{device[0].uuid}}</td>
-									<td class="td-actions">
-									{% if device.key_revoked %}
+									<td>{{device.radioID}}</td>
+									<td>{{device.channel}}</td>
+									<td>{{device.onlineseconds}}</td>
+									<!-- <td class="td-actions"> -->
+									<!-- {% if device.key_revoked %}
 
 										<button type="button" rel="tooltip" class="btn btn-info">
 											<i class="material-icons">check</i>
@@ -109,7 +109,7 @@
 											<i class="material-icons">close</i>
 										</button>
 									{% endif %}
-									</td>
+									</td> -->
 
 									<!--
 									<td>Online</td>
@@ -129,88 +129,6 @@
 								</tr>
 							{% endfor %}
 						{% endif %}
-							<!--
-							<tr>
-								<td class="text-center">2</td>
-								<td>Online</td>
-								<td>13</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Online</td>
-								<td>13</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">4</td>
-								<td>Offline</td>
-								<td>43</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">5</td>
-								<td>Online</td>
-								<td>43</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="text-center">8</td>
-								<td>Online</td>
-								<td>13</td>
-								<td class="td-actions">
-									<button type="button" rel="tooltip" class="btn btn-success">
-										<i class="material-icons">edit</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-info">
-										<i class="material-icons">check</i>
-									</button>
-									<button type="button" rel="tooltip" class="btn btn-danger">
-										<i class="material-icons">close</i>
-									</button>
-								</td>
-							</tr>
-						-->
 						</tbody>
 					</table>
 					</div>
