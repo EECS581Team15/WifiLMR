@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.ttk as ttk
 import time
 from . import resources
 from .images import *
@@ -7,7 +8,7 @@ from .images import *
 class UIHome:
     """Creates UI Home Screen."""
 
-    def __init__(self, window, master, hal):
+    def __init__(self, window, master, hal, battery_number, battery_color):
         """Creates a frame, and customizes and adds labels for UI Home Screen."""
 
         self.window = window
@@ -15,6 +16,9 @@ class UIHome:
         self.hal = hal
         self.my_frame = tk.Frame(window)
         self.icons = resources.Resources()
+        self.current_battery_number = battery_number
+        self.battery_color = battery_color
+
         window.bind("<Left>", self.button_1_action)
         window.bind("<space>", self.button_2_action)
         window.bind("<Right>", self.button_3_action)
@@ -23,6 +27,7 @@ class UIHome:
         self.add_top()
         self.add_middle()
         self.add_buttons()
+        self.set_battery()
 
     def pack_screen(self):
         """Puts the screen on the main window."""
@@ -92,7 +97,13 @@ class UIHome:
         self.label_2 = tk.Label(self.top_frame, text="",
                                 height=2, width=6, fg="white", bg="#3399ff")
         self.label_2.grid(row=0, column=1, sticky="nsew")
-
+        self.battery_style = ttk.Style()
+        self.battery_style.theme_use("classic")
+        self.battery_style.configure("Battery.Horizontal.TProgressbar", background=self.battery_color, foreground="red")
+        self.label_3 = ttk.Progressbar(self.top_frame, length=15, value=0, style="Battery.Horizontal.TProgressbar",
+                                       orient=tk.VERTICAL, mode="determinate")
+        self.label_3.grid(row=0, column=2, sticky="nsew")
+        
         self.wifi_icon = tk.Label(self.top_frame, height=31,
                                   width=24, image=self.icons.WIFI_NONE, bg="#3399ff")
         self.wifi_icon.place(x=136, y=0)
@@ -125,12 +136,30 @@ class UIHome:
                 image = self.icons.WIFI_1
         self.wifi_icon.config(image=image)
         self.wifi_icon.after(500, func=self.update_wifi)
+    
+    def set_battery(self):
+        self.label_3["value"] = self.current_battery_number
+
+    def modify_battery(self):
+        self.label_3["value"] = self.label_3["value"] + 4
+        self.current_battery_number = self.label_3["value"]
+        if self.current_battery_number > 50:
+            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="green", foreground="green")
+            self.battery_color = "green"
+        if self.current_battery_number < 50 and self.current_battery_number >= 20:
+            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="orange", foreground="orange")
+            self.battery_color = "orange"
+        if self.current_battery_number < 20:
+            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="red", foreground="red")
+            self.battery_color = "red"
 
     def button_1_action(self, *args):
+        self.master.current_battery_number = self.current_battery_number
+        self.master.current_battery_color = self.battery_color
         self.master.switch_screen(self.master.display_ui_back_light)
 
     def button_2_action(self, *args):
-        print("Button 2")
+        self.modify_battery()
 
     def button_3_action(self, *args):
         print("Button 3")
