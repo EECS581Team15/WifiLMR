@@ -1,4 +1,4 @@
-from mumble import MumbleAdapter
+from .mumble import MumbleAdapter
 from pymumble_py3.constants import *
 from collections import deque
 from threading import Thread
