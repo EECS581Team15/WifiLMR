@@ -23,7 +23,7 @@ class TESTING_CONFIG:
     SQLALCHEMY_DATABASE_URI = "sqlite://"
 
 
-def create_app(config_obj=TESTING_CONFIG):
+def create_app(config_obj=PRODUCTION_CONFIG):
     from .api import setup_routing
     app = Flask(__name__)
     app.config.from_object(config_obj)
@@ -31,37 +31,24 @@ def create_app(config_obj=TESTING_CONFIG):
     with app.app_context():
         FlaskExtensions.api.init_app(app)
         FlaskExtensions.db.init_app(app)
-        FlaskExtensions.db.create_all()
     @app.route('/', methods=['GET','POST'])
     def homepage():
 
         MUMBLE_SERVICE = "net.sourceforge.mumble.murmur"
         bus = dbus.SystemBus()
         server = bus.get_object(MUMBLE_SERVICE, "/1")
-        # playerList = server.getPlayers()
         murmur = dbus.Interface(server, 'net.sourceforge.mumble.Murmur')
         devices = murmur.getPlayers(dbus_interface='net.sourceforge.mumble.Murmur')
-        # devices = Device.query.all()
         print(devices, file=sys.stderr)
         outputList = []
         for d in devices:
-            device = { 
+            device = {
                 'name': d[8],
                 'radioID': d[7],
                 'channel': d[6],
                 'onlineseconds': d[9]
             }
             outputList.append(device)
-
-        # for device in devices:
-        #     added = False
-        #     for player in playerList:
-        #         if device.uuid == player.name:
-        #             outputList.append((device, player))
-        #             added = True
-        #             break
-        #     if not added:
-        #         outputList.append((device, None))
 
         return render_template('console.html', deviceList=outputList)
     return app
