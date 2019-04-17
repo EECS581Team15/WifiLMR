@@ -6,23 +6,12 @@ WifiLMR's backend server. Handles authentication, fleet management, and call
 routing.
 """
 
-from flask import Flask
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
 from . import mdns
-
-
-class FlaskExtensions:
-    """
-    """
-    db = SQLAlchemy()
-    api = Api()
-
-    @classmethod
-    def reset(cls):
-        # cls.db = SQLAlchemy()
-        cls.api = Api()
-
+from . import FlaskExtensions
+from .models.device import Device
+import sys
+import dbus
 
 class PRODUCTION_CONFIG:
     TESTING = False
@@ -42,6 +31,26 @@ def create_app(config_obj=PRODUCTION_CONFIG):
     with app.app_context():
         FlaskExtensions.api.init_app(app)
         FlaskExtensions.db.init_app(app)
+    @app.route('/', methods=['GET','POST'])
+    def homepage():
+
+        MUMBLE_SERVICE = "net.sourceforge.mumble.murmur"
+        bus = dbus.SystemBus()
+        server = bus.get_object(MUMBLE_SERVICE, "/1")
+        murmur = dbus.Interface(server, 'net.sourceforge.mumble.Murmur')
+        devices = murmur.getPlayers(dbus_interface='net.sourceforge.mumble.Murmur')
+        print(devices, file=sys.stderr)
+        outputList = []
+        for d in devices:
+            device = {
+                'name': d[8],
+                'radioID': d[7],
+                'channel': d[6],
+                'onlineseconds': d[9]
+            }
+            outputList.append(device)
+
+        return render_template('console.html', deviceList=outputList)
     return app
 
 
