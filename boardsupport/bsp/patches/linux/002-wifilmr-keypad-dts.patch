@@ -1,0 +1,103 @@
+--- a/dev/null	2019-02-08 20:54:08.775582010 -0600
++++ b/arch/arm/boot/dts/overlays/wifilmr-keypad.dts	2019-03-27 15:52:14.252664838 -0500
+@@ -0,0 +1,100 @@
++// WifiLMR keypad overlay
++// MCP23008 I2C GPIO expander and gpio-keyboard
++// All I2C pins are pulled low, so address is 0x20
++// INT line is routed to gpio 22 on BCM2835
++// Pins mapping:
++// 0 -> UP
++// 1 -> RIGHT
++// 2 -> SPACE
++// 3 -> DOWN
++// 4 -> LEFT
++
++/dts-v1/;
++/plugin/;
++
++
++/ {
++	fragment@1 {
++		target = <&gpio>;
++		__overlay__ {
++			mcp23008_pins: mcp23008_pins {
++				brcm,pins = <22>;
++				brcm,function = <0>;
++			};
++		};
++	};
++	fragment@2 {
++		target = <&i2c_gpio>;
++		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			keypad_gpio: gpio@20 {
++				compatible = "microchip,mcp23008";
++				status = "okay";
++				pinctrl-names = "default";
++				pinctrl-0 = <&mcp23008_pins>;
++
++				gpio-controller;
++				#gpio-cells = <2>;
++				reg = <0x20>;
++
++				interrupt-parent = <&gpio>;
++				interrupts = <22 2>;
++				interrupt-controller;
++				#interrupt-cells=<2>;
++			};
++		};
++	};
++	fragment@3 {
++		target = <&keypad_gpio>;
++		__overlay__ {
++			keypad_pins: pinmux {
++				pins = "gpio0", "gpio1", "gpio2", "gpio3", "gpio4";
++				bias-pull-up;
++			};
++		};
++	};
++	fragment@4 {
++		target-path = "/";
++		__overlay__ {
++			keypad: keypad {
++				compatible = "gpio-keys";
++				status = "okay";
++
++				pinctrl-names = "default";
++				pinctrl-0 = <&keypad_pins>;
++
++				key_up: key_up {
++					linux,code = <103>;
++					gpios = <&keypad_gpio 0 1>;
++					label = "KEY_UP";
++				};
++
++				key_right: key_right {
++					linux,code = <106>;
++					gpios = <&keypad_gpio 1 1>;
++					label = "KEY_RIGHT";
++				};
++
++				key_space: key_space {
++					linux,code = <57>;
++					gpios = <&keypad_gpio 2 1>;
++					label = "KEY_SPACE";
++				};
++
++				key_down: key_down {
++					linux,code = <108>;
++					gpios = <&keypad_gpio 3 1>;
++					label = "KEY_DOWN";
++				};
++
++				key_left: key_left {
++					linux,code = <105>;
++					gpios = <&keypad_gpio 4 1>;
++					label = "KEY_LEFT";
++				};
++			};
++		};
++	};
++};

@@ -1,0 +1,32 @@
+--- a/sound/soc/codecs/spdif_transmitter.c
++++ b/sound/soc/codecs/spdif_transmitter.c
+@@ -24,10 +24,8 @@
+ 
+ #define DRV_NAME "spdif-dit"
+ 
+-#define STUB_RATES	SNDRV_PCM_RATE_8000_192000
+-#define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S16_LE | \
+-			SNDRV_PCM_FMTBIT_S20_3LE | \
+-			SNDRV_PCM_FMTBIT_S24_LE)
++#define STUB_RATES	SNDRV_PCM_RATE_48000
++#define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S32_LE)
+ 
+ static const struct snd_soc_dapm_widget dit_widgets[] = {
+ 	SND_SOC_DAPM_OUTPUT("spdif-out"),
+
+--- a/sound/soc/codecs/spdif_receiver.c
++++ b/sound/soc/codecs/spdif_receiver.c
+@@ -31,11 +31,8 @@
+ 	{ "Capture", NULL, "spdif-in" },
+ };
+ 
+-#define STUB_RATES	SNDRV_PCM_RATE_8000_192000
+-#define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S16_LE | \
+-			SNDRV_PCM_FMTBIT_S20_3LE | \
+-			SNDRV_PCM_FMTBIT_S24_LE | \
+-			SNDRV_PCM_FMTBIT_IEC958_SUBFRAME_LE)
++#define STUB_RATES	SNDRV_PCM_RATE_48000
++#define STUB_FORMATS	(SNDRV_PCM_FMTBIT_S32_LE)
+ 
+ static const struct snd_soc_codec_driver soc_codec_spdif_dir = {
+ 	.component_driver = {

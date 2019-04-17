@@ -1,0 +1,30 @@
+--- a/dev/null	2019-02-08 20:54:08.775582010 -0600
++++ b/arch/arm/boot/dts/overlays/wifilmr-pwm.dts	2019-03-27 15:52:28.252830485 -0500
+@@ -0,0 +1,27 @@
++// Map PWM to GPIO 12
++// Based on pwm.dts
++
++/dts-v1/;
++/plugin/;
++
++/ {
++	fragment@0 {
++		target = <&gpio>;
++		__overlay__ {
++			pwm_pins: pwm_pins {
++				brcm,pins = <12>;
++				brcm,function = <4>; /* Alt5 */
++			};
++		};
++	};
++
++	fragment@1 {
++		target = <&pwm>;
++		frag1: __overlay__ {
++			pinctrl-names = "default";
++			pinctrl-0 = <&pwm_pins>;
++			assigned-clock-rates = <100000000>;
++			status = "okay";
++		};
++	};
++};
