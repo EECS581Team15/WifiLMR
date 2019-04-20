@@ -21,9 +21,11 @@ Setup, and retrieve current connection status information.
 import dbus
 from . import wifi
 from . import backlight
+from . import battery
 
 
 class HAL:
     def __init__(self):
         self.wifi = wifi.WpaSupplicant(dbus.SystemBus())
         self.backlight = backlight.Backlight()
+        self.battery = battery.Battery()
