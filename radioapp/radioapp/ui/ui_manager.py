@@ -11,8 +11,6 @@ class UIManager:
 
         self.hal = hal
         self.current_slider_number = 0
-        self.current_battery_number = 0
-        self.current_battery_color = "green"
         self.current_screen = None
 
         self.initialize_window()
@@ -22,7 +20,7 @@ class UIManager:
     def display_home(self):
         """Displays the Home screen."""
 
-        self.current_screen = UIHome(self.window, self, self.hal, self.current_battery_number, self.current_battery_color)
+        self.current_screen = UIHome(self.window, self, self.hal)
         self.current_screen.pack_screen()
 
     def display_ui_back_light(self):
