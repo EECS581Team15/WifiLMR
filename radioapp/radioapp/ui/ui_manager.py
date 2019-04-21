@@ -6,10 +6,11 @@ import tkinter as tk
 class UIManager:
     """Manages UI Screens and Settings."""
 
-    def __init__(self, hal):
+    def __init__(self, hal, sound):
         """Creates a window, and manages different screens and settings."""
 
         self.hal = hal
+        self.sound = sound
         self.current_slider_number = 0
         self.current_screen = None
 
@@ -51,3 +52,9 @@ class UIManager:
         """Loops the main window."""
 
         self.window.mainloop()
+
+    def ptt_pressed(self):
+        self.sound.set_recording(True)
+
+    def ptt_release(self):
+        self.sound.set_recording(False)

@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import time
+import pymumble_py3 as mumble
 from . import resources
 from .images import *
 
@@ -18,7 +19,8 @@ class UIHome:
         self.icons = resources.Resources()
 
         window.bind("<Left>", self.button_1_action)
-        window.bind("<space>", self.button_2_action)
+        window.bind("<KeyPress>", self.generic_keypress)
+        window.bind("<KeyRelease>", self.generic_keyrelease)
         window.bind("<Right>", self.button_3_action)
         self.master = master
 
@@ -35,7 +37,8 @@ class UIHome:
         """Destroys the screen from the main window."""
 
         self.window.unbind("<Left>")
-        self.window.unbind("<space>")
+        self.window.unbind("<KeyPress>")
+        self.window.unbind("<KeyRelease>")
         self.window.unbind("<Right>")
         self.my_frame.destroy()
 
@@ -77,9 +80,10 @@ class UIHome:
                                 fg="white", bg="#3399ff", font="Helvetica 9 bold")
         self.label_5.grid(row=4, column=0, sticky="nsew")
 
-        self.label_6 = tk.Label(self.middle_frame, text="          ",
-                                fg="white", bg="#3399ff", font="Helvetica 9 bold")
-        self.label_6.grid(row=4, column=1, sticky="nsew")
+        self.connected = tk.Label(self.middle_frame, text="disconnected",
+                                  fg="white", bg="#3399ff", font="Helvetica 9 bold")
+        self.connected.grid(row=4, column=1, sticky="nsew")
+        self.update_connected()
 
     def add_top(self):
         """Customizes and adds labels at the top frame."""
@@ -95,11 +99,12 @@ class UIHome:
                                 height=2, width=6, fg="white", bg="#3399ff")
         self.label_2.grid(row=0, column=1, sticky="nsew")
         self.battery_style = ttk.Style()
-        self.battery_style.configure("Battery.Horizontal.TProgressbar", background="#3399ff", foreground="red", length=8)
+        self.battery_style.configure(
+            "Battery.Horizontal.TProgressbar", background="#3399ff", foreground="red", length=8)
         self.battery_label = ttk.Progressbar(self.top_frame, length=4, value=0, style="Battery.Horizontal.TProgressbar",
-                                       orient=tk.VERTICAL, mode="determinate")
+                                             orient=tk.VERTICAL, mode="determinate")
         self.battery_label.grid(row=0, column=2, sticky="nsew")
-        
+
         self.wifi_icon = tk.Label(self.top_frame, height=31,
                                   width=24, image=self.icons.WIFI_NONE, bg="#3399ff")
         self.wifi_icon.place(x=136, y=0)
@@ -136,15 +141,28 @@ class UIHome:
 
     def update_battery(self):
         percent = self.hal.battery.poll() * 100
-        print(percent)
         self.battery_label["value"] = percent
         if percent > 50:
-            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="green", foreground="green")
+            self.battery_style.configure(
+                "Battery.Horizontal.TProgressbar", background="green", foreground="green")
         elif percent > 20:
-            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="orange", foreground="orange")
+            self.battery_style.configure(
+                "Battery.Horizontal.TProgressbar", background="orange", foreground="orange")
         else:
-            self.battery_style.configure("Battery.Horizontal.TProgressbar", background="red", foreground="red")
+            self.battery_style.configure(
+                "Battery.Horizontal.TProgressbar", background="red", foreground="red")
         self.battery_label.after(2000, func=self.update_battery)
+
+    def update_connected(self):
+        state = self.master.sound.mumble.connected
+        state = {
+            mumble.constants.PYMUMBLE_CONN_STATE_NOT_CONNECTED: "Offline",
+            mumble.constants.PYMUMBLE_CONN_STATE_AUTHENTICATING: "Offline",
+            mumble.constants.PYMUMBLE_CONN_STATE_FAILED: "Offline",
+            mumble.constants.PYMUMBLE_CONN_STATE_CONNECTED: "Online"
+        }.get(state, "Unknown")
+        self.connected.configure(text="Status: "+state)
+        self.connected.after(500, self.update_connected)
 
     def button_1_action(self, *args):
         self.master.switch_screen(self.master.display_ui_back_light)
@@ -154,3 +172,11 @@ class UIHome:
 
     def button_3_action(self, *args):
         print("Button 3")
+
+    def generic_keypress(self, ev):
+        if ev.keysym == "space":
+            self.master.ptt_pressed()
+
+    def generic_keyrelease(self, ev):
+        if ev.keysym == "space":
+            self.master.ptt_release()
