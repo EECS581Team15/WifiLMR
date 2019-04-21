@@ -14,6 +14,7 @@ if __name__ == "__main__":
     hal = HAL()
     core = Core()
     # Remove the backlight hardcoding once we've got proper UI support/state saving
-    hal.backlight.set_level(100)
+    backlight = int(core.state.state.get("backlight", 100))
+    hal.backlight.set_level(backlight)
     manager = ui_manager.UIManager(hal, core)
     manager.main_loop()

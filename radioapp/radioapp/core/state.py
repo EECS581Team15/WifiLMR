@@ -12,3 +12,11 @@ radio action that are not preferences but must survive reboots. The backing
 store for this data will provide forward compatibility in the case of schema
 changes.
 """
+
+import dbm
+import os
+
+class State:
+    def __init__(self):
+        path = os.path.join(os.environ["HOME"], ".wifilmr_state.db")
+        self.state = dbm.open(path, 'c')

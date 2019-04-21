@@ -22,7 +22,6 @@ class UIBackLight:
         self.add_label()
 
         # Adds slider to the window.
-        self.current_slider_number = slider_number
         self.add_slider()
         self.modify_slider()
 
@@ -55,14 +54,13 @@ class UIBackLight:
         """Saves the slider value, and switches screen."""
 
         self.master.core.sound_fx.beep()
-        master.current_slider_number = self.current_slider_number
         master.switch_screen(master.display_home)
 
     def modify_slider(self):
         """Sets the slider value."""
 
         self.slider.configure(state="active")
-        self.slider.set(self.current_slider_number)
+        self.slider.set(self.get_from_state())
         self.slider.configure(state="disabled")
 
     def add_slider(self):
@@ -72,7 +70,7 @@ class UIBackLight:
         self.top_label.grid(row=2)
 
         self.slider = tk.Scale(self.my_frame, from_=0, to=100, fg="white", bg="#3399ff", state="disabled",
-                               sliderlength=20, orient=tk.HORIZONTAL, command=lambda value: self.hal.backlight.set_level(int(value)))
+                               sliderlength=20, orient=tk.HORIZONTAL, command=self.handle_slider_update)
         self.slider.grid(row=3)
 
     def add_label(self):
@@ -85,17 +83,21 @@ class UIBackLight:
     def right_key(self, event):
         """Binds Up key to change the slider value."""
 
-        self.master.core.sound_fx.beep()
         self.slider.configure(state="active")
-        self.slider.set(self.current_slider_number + 10)
-        self.current_slider_number = self.current_slider_number + 10
+        self.slider.set(self.get_from_state() + 10)
         self.slider.configure(state="disabled")
 
     def left_key(self, event):
         """Binds Down key to change the slider value."""
 
-        self.master.core.sound_fx.beep()
         self.slider.configure(state="active")
-        self.slider.set(self.current_slider_number - 10)
-        self.current_slider_number = self.current_slider_number - 10
+        self.slider.set(self.get_from_state() - 10)
         self.slider.configure(state="disabled")
+
+    def handle_slider_update(self, value):
+        self.master.core.sound_fx.beep()
+        self.hal.backlight.set_level(int(value))
+        self.master.core.state.state["backlight"] = value
+
+    def get_from_state(self):
+        return int(self.master.core.state.state.get("backlight", 100))
