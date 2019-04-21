@@ -6,11 +6,11 @@ import tkinter as tk
 class UIManager:
     """Manages UI Screens and Settings."""
 
-    def __init__(self, hal, sound):
+    def __init__(self, hal, core):
         """Creates a window, and manages different screens and settings."""
 
         self.hal = hal
-        self.sound = sound
+        self.core = core
         self.current_slider_number = 0
         self.current_screen = None
 
@@ -54,7 +54,7 @@ class UIManager:
         self.window.mainloop()
 
     def ptt_pressed(self):
-        self.sound.set_recording(True)
+        self.core.sound_rx_tx.set_recording(True)
 
     def ptt_release(self):
-        self.sound.set_recording(False)
+        self.core.sound_rx_tx.set_recording(False)

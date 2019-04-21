@@ -9,6 +9,7 @@ class UIBackLight:
 
         self.window_copy = window
         self.hal = hal
+        self.master = master
         window.title("BackLight Setting")
         self.my_frame = tk.Frame(window, bg="#3399ff")
 
@@ -53,6 +54,7 @@ class UIBackLight:
     def save_and_switch(self, master):
         """Saves the slider value, and switches screen."""
 
+        self.master.core.sound_fx.beep()
         master.current_slider_number = self.current_slider_number
         master.switch_screen(master.display_home)
 
@@ -83,6 +85,7 @@ class UIBackLight:
     def right_key(self, event):
         """Binds Up key to change the slider value."""
 
+        self.master.core.sound_fx.beep()
         self.slider.configure(state="active")
         self.slider.set(self.current_slider_number + 10)
         self.current_slider_number = self.current_slider_number + 10
@@ -91,6 +94,7 @@ class UIBackLight:
     def left_key(self, event):
         """Binds Down key to change the slider value."""
 
+        self.master.core.sound_fx.beep()
         self.slider.configure(state="active")
         self.slider.set(self.current_slider_number - 10)
         self.current_slider_number = self.current_slider_number - 10

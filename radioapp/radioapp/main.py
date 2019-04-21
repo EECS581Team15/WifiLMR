@@ -15,5 +15,5 @@ if __name__ == "__main__":
     core = Core()
     # Remove the backlight hardcoding once we've got proper UI support/state saving
     hal.backlight.set_level(100)
-    manager = ui_manager.UIManager(hal, core.sound_rx_tx)
+    manager = ui_manager.UIManager(hal, core)
     manager.main_loop()

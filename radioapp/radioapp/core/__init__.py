@@ -8,6 +8,7 @@ The Core module encapsulates the business logic of RadioApp.
 import pymumble_py3
 import uuid
 from . import sound
+from . import sound_effects
 
 class Core:
     def __init__(self):
@@ -15,3 +16,4 @@ class Core:
         self.mumble.setDaemon(True)
         self.mumble.start()
         self.sound_rx_tx = sound.SoundManager(self.mumble)
+        self.sound_fx = sound_effects.SoundEffects()

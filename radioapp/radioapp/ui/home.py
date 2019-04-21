@@ -154,7 +154,7 @@ class UIHome:
         self.battery_label.after(2000, func=self.update_battery)
 
     def update_connected(self):
-        state = self.master.sound.mumble.connected
+        state = self.master.core.sound_rx_tx.mumble.connected
         state = {
             mumble.constants.PYMUMBLE_CONN_STATE_NOT_CONNECTED: "Offline",
             mumble.constants.PYMUMBLE_CONN_STATE_AUTHENTICATING: "Offline",
@@ -165,6 +165,7 @@ class UIHome:
         self.connected.after(500, self.update_connected)
 
     def button_1_action(self, *args):
+        self.master.core.sound_fx.beep()
         self.master.switch_screen(self.master.display_ui_back_light)
 
     def button_2_action(self, *args):
@@ -172,6 +173,7 @@ class UIHome:
 
     def button_3_action(self, *args):
         print("Button 3")
+        self.master.core.sound_fx.error()
 
     def generic_keypress(self, ev):
         if ev.keysym == "space":
