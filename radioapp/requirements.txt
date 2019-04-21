@@ -1,5 +1,6 @@
 dbus-python == 1.2.8
 opuslib==2.0.0
 protobuf==3.4.0
-PyAudio==0.2.11
+pyalsaaudio==0.8.4
+pysoundfile==0.9.0.post1
 pymumble==0.3.1

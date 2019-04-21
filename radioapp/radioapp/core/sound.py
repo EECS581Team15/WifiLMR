@@ -1,105 +1,98 @@
-from mumble import MumbleAdapter
-from pymumble_py3.constants import *
-from collections import deque
-from threading import Thread
+import pymumble_py3 as mumble
+import alsaaudio
+import logging
+import select
+import threading
+import time
 
 class SoundManager():
+    SR = 48000
+    PERIOD_MS = 0.01
+    PERIOD_SIZE = int(SR * PERIOD_MS)
 
-    def __init__(self, mumble):
+    class AudioOutput:
+        def __init__(self):
+            self.pcm = alsaaudio.PCM(type=alsaaudio.PCM_PLAYBACK,
+                                     mode=alsaaudio.PCM_NONBLOCK)
+            self.pcm.setrate(SoundManager.SR)
+            self.pcm.setchannels(1)
+            self.pcm.setperiodsize(SoundManager.PERIOD_SIZE)
+    def __init__(self, mumble_):
         """ 
             Constructor for the Sound Manager
             mumble: an instance of MumbleAdapter
         """
-        self.mumble = mumble
-        self.CHUNK = 1920
-        self.STEREO_MIC = True
+        self.mumble = mumble_
+        self.log = logging.getLogger(self.__class__.__name__)
+        self._on_status_change = None
+        self.mumble.callbacks.set_callback(
+            mumble.constants.PYMUMBLE_CLBK_SOUNDRECEIVED, self.sound_received)
+        self.mumble.callbacks.set_callback(
+            mumble.constants.PYMUMBLE_CLBK_USERCREATED, self.user_added)
+        self.mumble.callbacks.set_callback(
+            mumble.constants.PYMUMBLE_CLBK_USERREMOVED, self.user_removed)
+        self.mumble.set_receive_sound(True)
+        self.pcm_in = alsaaudio.PCM(type=alsaaudio.PCM_CAPTURE)
+        self.pcm_in.setrate(self.SR)
+        self.pcm_in.setchannels(1)
+        self.pcm_in.setperiodsize(self.PERIOD_SIZE)
+        self.pcm_in.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+        self.should_record = threading.Event()
+        self.audio_outputs = {}
+        self.send_thread = threading.Thread(target=self.recording_process, daemon=True)
+        self.send_thread.start()
 
-        self.sound_in_queue = deque()
-        self.mumble.set_mumble_callback(PYMUMBLE_CLBK_SOUNDRECEIVED, self.sound_received)
-
-        self.sound_play_proc = Thread(target=self.play_raw_audio_proc)
-        self.should_play_sound = False
-
-        self.record_proc = Thread(target=self.start_recording)
-        self.should_record = False
-
-        self.sound_play_proc.start()
-        self.record_proc.start()
-
-    def set_playing(self, should_play_sound):
-        """ 
-            Set variable responsible for speaker output control
-        """
-        self.should_play_sound = should_play_sound
-
-    def sound_received(self, user_queue, raw_sound):
+    def sound_received(self, user, raw_sound):
         """ 
         Callback used when sound is received. 
         user_queue is the queue of the user speaking.
         raw_sound is the sound object being placed in queue.
         """
-        self.play_raw_audio(raw_sound.pcm)
+        if user["session"] in self.audio_outputs:
+            output = self.audio_outputs[user["session"]]
+            sound = user.sound.get_sound()
+            output.pcm.write(sound.pcm)
+        else:
+            self.log.error("User %s not in audio_outputs!", user)
 
-    def play_raw_audio(self, sound):
-        """ 
-        Places raw pcm audio into the sound queue for the raw_audio
-            process to play.
-        """
-        self.sound_in_queue.append(sound)
+    def user_added(self, user):
+        output = self.AudioOutput()
+        self.audio_outputs[user["session"]] = output
 
-    def play_raw_audio_proc(self):
-        """ 
-        Target for a thread that consumes raw audio and
-            feeds it to PyAudio
-        """
-        import pyaudio
-        
-        pa = pyaudio.PyAudio()
-        stream = pa.open(format=pyaudio.paInt16,
-                                    channels=1,
-                                    rate=48000,
-                                    output=True,
-                                    input=False,
-                                    frames_per_buffer=self.CHUNK)
+    def user_removed(self, user, msg):
+        del self.audio_outputs[user["session"]]
 
-        while len(self.sound_in_queue) > 0:
-            if self.should_play_sound:
-                stream.write(self.sound_in_queue.popleft())
-
-    
     def set_recording(self, should_record):
         """ 
         Sets variable responsible for controlling microphone input
         """
-        self.should_record = should_record
+        if should_record:
+            self.should_record.set()
+        else:
+            self.should_record.clear()
 
-    def start_recording(self):
-        """ 
-        Process for recording audio and sending it to mumble server
-        """
-        import pyaudio
-
-        self.mumble.upload_size(0.02)
-
-        def recording_received(in_data, frame_count, time_info, status):
-            if self.should_record:
-                self.mumble.send_sound(in_data)
-                #print(len(in_data))
-            return (None, pyaudio.paContinue)
-
-        pa = pyaudio.PyAudio()
-        xChunk = 2 if self.STEREO_MIC else 1
-        chunk = self.CHUNK // xChunk
-        stream = pa.open(format=pyaudio.paInt16,
-                                    channels=1,
-                                    rate=48000,
-                                    output=False,
-                                    input=True,
-                                    stream_callback=recording_received,
-                                    frames_per_buffer=chunk)
-
-        stream.start_stream()
+    def recording_process(self):
+        while True:
+            self.should_record.wait()
+            print("Unmuting...")
+            self.mumble.sound_output.clear_buffer()
+            while self.should_record.is_set():
+                _, data = self.pcm_in.read()
+                # The overshoot non-sense gets around an issue in pymumble that
+                # causes previous recordings to "stack up"
+                if self.mumble.sound_output.get_buffer_size() < 0.2:
+                    self.mumble.sound_output.add_sound(data)
+    def on_status_change(self, callback):
+        self._on_status_change = callback
 
 
-
-    
+if __name__ == "__main__":
+    mum = mumble.Mumble("localhost", "foouser")
+    mum.setDaemon(True)
+    sm = SoundManager(mum)
+    mum.start()
+    while True:
+        input("Press enter to unmute")
+        sm.set_recording(True)
+        input("Press enter to mute")
+        sm.set_recording(False)
