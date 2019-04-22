@@ -1,0 +1,11 @@
+--- a/opuslib/api/__init__.py
++++ b/opuslib/api/__init__.py
+@@ -14,7 +14,7 @@
+ __license__ = 'BSD 3-Clause License'
+ 
+ 
+-lib_location = find_library('opus')
++lib_location = "/usr/lib/libopus.so"
+ 
+ if lib_location is None:
+     raise Exception(
