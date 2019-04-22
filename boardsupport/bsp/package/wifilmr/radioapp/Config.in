@@ -2,6 +2,7 @@
 config BR2_PACKAGE_RADIOAPP
 	bool "radioapp"
 	select BR2_PACKAGE_PYTHON_TKINTER
+	select BR2_PACKAGE_XAPP_XSET
 	help
 	  WifiLMR radioapp.
 

@@ -20,5 +20,6 @@ RADIOAPP_SITE = $(BR2_DL_DIR)/../../../radioapp
 RADIOAPP_SITE_METHOD = local
 RADIOAPP_SOURCE = radioapp-$(RADIOAPP_VERSION).tar.gz
 RADIOAPP_SETUP_TYPE = setuptools
+RADIOAPP_DEPENDENCIES = python-alsaaudio python3-pymumble
 
 $(eval $(python-package))
