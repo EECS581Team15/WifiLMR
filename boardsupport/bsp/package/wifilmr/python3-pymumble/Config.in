@@ -1,0 +1,7 @@
+
+config BR2_PACKAGE_PYTHON3_PYMUMBLE
+	bool "python3-pymumble"
+	help
+	  PYMUMBLE python library
+
+	  https://github.com/azlux/pymumble/
