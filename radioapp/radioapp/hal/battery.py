@@ -19,7 +19,13 @@ class Battery:
         """
         Returns the voltage read by the ADC
         """
-        return ((random.random() * (self.HIGH_VOLTAGE - self.LOW_VOLTAGE) + self.LOW_VOLTAGE) * self.R2_OHMS) / (self.R1_OHMS + self.R2_OHMS)
+        try:
+            scale = open("/sys/bus/iio/devices/iio:device0/in_voltage0_scale", 'r').read()
+            raw = open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw", 'r').read()
+            return float(scale) * int(raw)
+        except FileNotFoundError as e:
+            print("Could not open", e)
+            return self.HIGH_VOLTAGE
 
     def scale_divider(self, sample):
         print("sample", sample)
