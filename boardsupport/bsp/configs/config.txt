@@ -3,5 +3,10 @@ gpu_mem_256=100
 gpu_mem_512=100
 gpu_mem_1024=100
 dtparam=spi=on
-dtoverlay=pwm
 dtoverlay=disable-p3-bt
+dtoverlay=pi3-disable-bt
+dtoverlay=i2c-gpio,i2c_gpio_sda=3,i2c_gpio_scl=2
+dtoverlay=wifilmr-audio
+dtoverlay=wifilmr-keypad
+dtoverlay=wifilmr-pwm
+dtoverlay=mcp3421
