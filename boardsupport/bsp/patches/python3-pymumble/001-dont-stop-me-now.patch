@@ -1,0 +1,14 @@
+--- a/pymumble_py3/mumble.py
++++ b/pymumble_py3/mumble.py
+@@ -111,9 +111,8 @@
+         while True:
+             self.init_connection()  # reset the connection-specific object members
+ 
+-            if self.connect() >= PYMUMBLE_CONN_STATE_FAILED:  # some error occurred, exit here
+-                self.ready_lock.release()
+-                break
++            if self.connect() >= PYMUMBLE_CONN_STATE_FAILED:  # some error occurred, sleep for a bit and try again
++                time.sleep(0.2)
+ 
+             try:
+                 self.loop()
