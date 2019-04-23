@@ -81,7 +81,10 @@ class SoundManager():
                 # The overshoot non-sense gets around an issue in pymumble that
                 # causes previous recordings to "stack up"
                 if self.mumble.sound_output.get_buffer_size() < 0.2:
-                    self.mumble.sound_output.add_sound(data)
+                    try:
+                        self.mumble.sound_output.add_sound(data)
+                    except Exception as e:
+                        print(e)
     def on_status_change(self, callback):
         self._on_status_change = callback
 
